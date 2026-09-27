@@ -2,37 +2,49 @@ name: Documentation
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - 'v*'
+    branches: [main, slate-docs]
+    tags: ['v*']
   pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
 jobs:
   docs:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+      statuses: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Julia
-        uses: julia-actions/setup-julia@v2
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
         with:
-          version: '1.11'
-
-      - name: Instantiate documentation environment
-        shell: bash
+          version: '1.12'
+      - uses: julia-actions/cache@v2
+      - name: Install dependencies
         run: |
           julia --project=docs -e 'using Pkg; Pkg.instantiate()'
-
-      - name: Build and deploy documentation
-        shell: bash
+          julia --project=docs/notebooks -e 'using Pkg; Pkg.instantiate()'
+      # Rendered notebooks are reused while nothing they run has changed. A bundle's own key covers
+      # only its notebook file, so the cache key also covers the notebooks' environment and the
+      # AgriViz package beside them.
+      - name: Rendered notebooks
+        uses: actions/cache@v4
+        with:
+          path: docs/slate
+          key: slate-bundles-${{ hashFiles('docs/notebooks/**', 'docs/Project.toml', 'data/**', 'src/**') }}
+      - name: Build and deploy
+        run: julia --project=docs docs/make.jl
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
+      # A render that fails inside the Kaimon host leaves its reasons in the host's and the Slate
+      # extension's logs, which disappear with the runner.
+      - name: Kaimon host logs
+        if: failure()
         run: |
-          julia --project=docs docs/make.jl
+          find ~/.cache/kaimonslate /tmp -path '*kaimon*' -name '*.log' 2>/dev/null | while read -r f; do
+            echo "::group::$f"; tail -n 150 "$f"; echo "::endgroup::"
+          done
