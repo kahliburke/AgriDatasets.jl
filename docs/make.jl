@@ -11,7 +11,7 @@ makedocs(;
     sitename = "AgriDatasets.jl",
     modules = [AgriDatasets],
     repo = Remotes.GitHub("kahliburke", "AgriDatasets.jl"),
-    format = MarkdownVitepress(; repo = REPO, devbranch = "main", devurl = "dev"),
+    format = MarkdownVitepress(; repo = REPO, devbranch = "slate-docs", devurl = "dev"),
     plugins = [SlateDocs()],
     pages = [
         "Home" => "index.md",
@@ -22,4 +22,4 @@ makedocs(;
 )
 
 DocumenterVitepress.deploydocs(; repo = REPO, target = joinpath(@__DIR__, "build"),
-                               branch = "gh-pages", devbranch = "main", push_preview = true)
+                               branch = "gh-pages", devbranch = "slate-docs", push_preview = true)
