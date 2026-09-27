@@ -1,8 +1,13 @@
-# black_duck_survival
+# black\_duck\_survival
 
 ## Description
 
 Survival of black ducks
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl black_duck_survival
+```
 
 ## Dataset information
 
@@ -15,16 +20,17 @@ Survival of black ducks
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=collett
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `duck` |
-| `time` |
-| `status` |
-| `age` |
-| `weight` |
-| `length` |
+```@slate ../../notebooks/tables.jl black_duck_survival_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl black_duck_survival_data
+```
+
+The first 25 of 50 rows. `load_dataset("black_duck_survival")` returns them all.
 
 ## Usage
 

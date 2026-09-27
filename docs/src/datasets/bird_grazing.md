@@ -1,8 +1,13 @@
-# bird_grazing
+# bird\_grazing
 
 ## Description
 
 Bird abundance in grazing areas
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl bird_grazing
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Bird abundance in grazing areas
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=GLMsData
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `When` |
-| `Grazed` |
-| `Birds` |
+```@slate ../../notebooks/tables.jl bird_grazing_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl bird_grazing_data
+```
+
+The first 25 of 62 rows. `load_dataset("bird_grazing")` returns them all.
 
 ## Usage
 

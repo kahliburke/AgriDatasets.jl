@@ -1,8 +1,13 @@
-# cotton_pesticide
+# cotton\_pesticide
 
 ## Description
 
 Cotton response to herbicide and insecticide
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl cotton_pesticide
+```
 
 ## Dataset information
 
@@ -15,14 +20,17 @@ Cotton response to herbicide and insecticide
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=smbdata
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `ID` |
-| `H` |
-| `I` |
-| `Weight` |
+```@slate ../../notebooks/tables.jl cotton_pesticide_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl cotton_pesticide_data
+```
+
+All 25 rows.
 
 ## Usage
 

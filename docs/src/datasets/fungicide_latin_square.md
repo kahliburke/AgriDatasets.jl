@@ -1,8 +1,13 @@
-# fungicide_latin_square
+# fungicide\_latin\_square
 
 ## Description
 
 Latin square experiment for testing fungicide
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl fungicide_latin_square
+```
 
 ## Dataset information
 
@@ -15,14 +20,17 @@ Latin square experiment for testing fungicide
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `trt` |
-| `yield` |
-| `row` |
-| `col` |
+```@slate ../../notebooks/tables.jl fungicide_latin_square_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl fungicide_latin_square_data
+```
+
+All 25 rows.
 
 ## Usage
 

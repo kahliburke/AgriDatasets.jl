@@ -1,8 +1,13 @@
-# soil_munsell_minerals
+# soil\_munsell\_minerals
 
 ## Description
 
 Munsell colors of common soil minerals
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl soil_munsell_minerals
+```
 
 ## Dataset information
 
@@ -15,15 +20,17 @@ Munsell colors of common soil minerals
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=aqp
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `mineral` |
-| `color` |
-| `hue` |
-| `value` |
-| `chroma` |
+```@slate ../../notebooks/tables.jl soil_munsell_minerals_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl soil_munsell_minerals_data
+```
+
+All 20 rows.
 
 ## Usage
 

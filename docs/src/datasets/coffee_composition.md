@@ -1,8 +1,15 @@
-# coffee_composition
+# coffee\_composition
 
 ## Description
 
 Chemical composition of Arabica and Robusta coffee samples
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl coffee_composition_pick
+```
+```@slate ../../notebooks/gallery.jl coffee_composition
+```
 
 ## Dataset information
 
@@ -15,24 +22,17 @@ Chemical composition of Arabica and Robusta coffee samples
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=IMIFA
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Variety` |
-| `Country` |
-| `Water` |
-| `Bean Weight` |
-| `Extract Yield` |
-| `ph Value` |
-| `Free Acid` |
-| `Mineral Content` |
-| `Fat` |
-| `Caffine` |
-| `Trigonelline` |
-| `Chlorogenic Acid` |
-| `Neochlorogenic Acid` |
-| `Isochlorogenic Acid` |
+```@slate ../../notebooks/tables.jl coffee_composition_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl coffee_composition_data
+```
+
+The first 25 of 43 rows. `load_dataset("coffee_composition")` returns them all.
 
 ## Usage
 

@@ -1,8 +1,15 @@
-# rice_wheat_production
+# rice\_wheat\_production
 
 ## Description
 
 Modeling rice and wheat production
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl rice_wheat_production_pick
+```
+```@slate ../../notebooks/gallery.jl rice_wheat_production
+```
 
 ## Dataset information
 
@@ -15,16 +22,17 @@ Modeling rice and wheat production
 - **Original license:** GPL-2
 - **Source:** https://cran.r-project.org/package=gpk
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Food` |
-| `Year` |
-| `Area` |
-| `Production` |
-| `Yield` |
-| `Irrigated` |
+```@slate ../../notebooks/tables.jl rice_wheat_production_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl rice_wheat_production_data
+```
+
+The first 25 of 106 rows. `load_dataset("rice_wheat_production")` returns them all.
 
 ## Usage
 

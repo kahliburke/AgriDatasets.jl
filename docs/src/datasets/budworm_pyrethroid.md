@@ -1,8 +1,13 @@
-# budworm_pyrethroid
+# budworm\_pyrethroid
 
 ## Description
 
 Insecticide doses and tobacco budworm
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl budworm_pyrethroid
+```
 
 ## Dataset information
 
@@ -15,14 +20,17 @@ Insecticide doses and tobacco budworm
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=GLMsData
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Killed` |
-| `Number` |
-| `Dose` |
-| `Gender` |
+```@slate ../../notebooks/tables.jl budworm_pyrethroid_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl budworm_pyrethroid_data
+```
+
+All 12 rows.
 
 ## Usage
 

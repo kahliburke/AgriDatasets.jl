@@ -1,8 +1,13 @@
-# kiwi_crop_design
+# kiwi\_crop\_design
 
 ## Description
 
 Experimental design of kiwifruit cover crops
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl kiwi_crop_design
+```
 
 ## Dataset information
 
@@ -15,12 +20,17 @@ Experimental design of kiwifruit cover crops
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=easynem
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `SampleID` |
-| `Treatments` |
+```@slate ../../notebooks/tables.jl kiwi_crop_design_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl kiwi_crop_design_data
+```
+
+All 12 rows.
 
 ## Usage
 

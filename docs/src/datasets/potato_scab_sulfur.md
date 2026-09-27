@@ -1,8 +1,13 @@
-# potato_scab_sulfur
+# potato\_scab\_sulfur
 
 ## Description
 
 Potato scab infection with sulfur treatments
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl potato_scab_sulfur
+```
 
 ## Dataset information
 
@@ -15,14 +20,17 @@ Potato scab infection with sulfur treatments
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `inf` |
-| `trt` |
-| `row` |
-| `col` |
+```@slate ../../notebooks/tables.jl potato_scab_sulfur_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl potato_scab_sulfur_data
+```
+
+The first 25 of 32 rows. `load_dataset("potato_scab_sulfur")` returns them all.
 
 ## Usage
 

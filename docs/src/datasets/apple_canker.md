@@ -1,8 +1,13 @@
-# apple_canker
+# apple\_canker
 
 ## Description
 
 Infestation of apple shoots by apple canker
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl apple_canker
+```
 
 ## Dataset information
 
@@ -15,15 +20,17 @@ Infestation of apple shoots by apple canker
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `inoculum` |
-| `gen` |
-| `block` |
-| `y` |
-| `n` |
+```@slate ../../notebooks/tables.jl apple_canker_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl apple_canker_data
+```
+
+The first 25 of 36 rows. `load_dataset("apple_canker")` returns them all.
 
 ## Usage
 

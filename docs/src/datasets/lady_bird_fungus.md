@@ -1,8 +1,13 @@
-# lady_bird_fungus
+# lady\_bird\_fungus
 
 ## Description
 
 Ladybird transmission of fungus
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl lady_bird_fungus
+```
 
 ## Dataset information
 
@@ -15,18 +20,17 @@ Ladybird transmission of fungus
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=smbdata
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `ID` |
-| `Run` |
-| `DPlant` |
-| `Host` |
-| `Ladybird` |
-| `Cadaver` |
-| `Live` |
-| `Infected` |
+```@slate ../../notebooks/tables.jl lady_bird_fungus_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl lady_bird_fungus_data
+```
+
+The first 25 of 72 rows. `load_dataset("lady_bird_fungus")` returns them all.
 
 ## Usage
 

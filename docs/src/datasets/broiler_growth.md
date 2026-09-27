@@ -1,8 +1,13 @@
-# broiler_growth
+# broiler\_growth
 
 ## Description
 
 Daily weight, feed, egg measurements for a broiler chicken
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl broiler_growth
+```
 
 ## Dataset information
 
@@ -15,16 +20,17 @@ Daily weight, feed, egg measurements for a broiler chicken
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `bw` |
-| `targetbw` |
-| `adfi` |
-| `adg` |
-| `eggwt` |
-| `age` |
+```@slate ../../notebooks/tables.jl broiler_growth_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl broiler_growth_data
+```
+
+The first 25 of 59 rows. `load_dataset("broiler_growth")` returns them all.
 
 ## Usage
 

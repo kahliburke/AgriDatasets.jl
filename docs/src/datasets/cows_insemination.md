@@ -1,8 +1,13 @@
-# cows_insemination
+# cows\_insemination
 
 ## Description
 
 Crossbreeding of cows
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl cows_insemination
+```
 
 ## Dataset information
 
@@ -15,17 +20,17 @@ Crossbreeding of cows
 - **Original license:** GPL-2
 - **Source:** https://cran.r-project.org/package=gpk
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Time` |
-| `Sillod_Insemination_C1` |
-| `Sillod_Conception_C1` |
-| `Sillod_Insemination_C2` |
-| `Sillod_Conception_C2` |
-| `Sillod_Insemination_C3` |
-| `Sillod_Conception_C3` |
+```@slate ../../notebooks/tables.jl cows_insemination_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl cows_insemination_data
+```
+
+All 10 rows.
 
 ## Usage
 

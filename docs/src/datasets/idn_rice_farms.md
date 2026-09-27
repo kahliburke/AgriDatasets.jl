@@ -1,8 +1,13 @@
-# idn_rice_farms
+# idn\_rice\_farms
 
 ## Description
 
 Production of rice in Indonesia
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl idn_rice_farms
+```
 
 ## Dataset information
 
@@ -15,30 +20,17 @@ Production of rice in Indonesia
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=plm
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `id` |
-| `size` |
-| `status` |
-| `varieties` |
-| `bimas` |
-| `seed` |
-| `urea` |
-| `phosphate` |
-| `pesticide` |
-| `pseed` |
-| `purea` |
-| `pphosph` |
-| `hiredlabor` |
-| `famlabor` |
-| `totlabor` |
-| `wage` |
-| `goutput` |
-| `noutput` |
-| `price` |
-| `region` |
+```@slate ../../notebooks/tables.jl idn_rice_farms_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl idn_rice_farms_data
+```
+
+The first 25 of 1,026 rows. `load_dataset("idn_rice_farms")` returns them all.
 
 ## Usage
 

@@ -1,8 +1,13 @@
-# cattle_butterfat
+# cattle\_butterfat
 
 ## Description
 
 Butterfat and dairy cattle
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl cattle_butterfat
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Butterfat and dairy cattle
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=GLMsData
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Butterfat` |
-| `Breed` |
-| `Age` |
+```@slate ../../notebooks/tables.jl cattle_butterfat_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl cattle_butterfat_data
+```
+
+The first 25 of 100 rows. `load_dataset("cattle_butterfat")` returns them all.
 
 ## Usage
 

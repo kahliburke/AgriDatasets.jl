@@ -1,8 +1,13 @@
-# rabbit_body_mass
+# rabbit\_body\_mass
 
 ## Description
 
 Relating foot length to body mass
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl rabbit_body_mass
+```
 
 ## Dataset information
 
@@ -15,12 +20,17 @@ Relating foot length to body mass
 - **Original license:** GPL-2
 - **Source:** https://cran.r-project.org/package=gpk
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Hind_Foot_Length` |
-| `Body_Weight` |
+```@slate ../../notebooks/tables.jl rabbit_body_mass_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl rabbit_body_mass_data
+```
+
+The first 25 of 141 rows. `load_dataset("rabbit_body_mass")` returns them all.
 
 ## Usage
 

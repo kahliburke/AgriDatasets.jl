@@ -1,8 +1,13 @@
-# lamb_births
+# lamb\_births
 
 ## Description
 
 Number of lambs born to 3 breeds on 3 farms
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl lamb_births
+```
 
 ## Dataset information
 
@@ -15,14 +20,17 @@ Number of lambs born to 3 breeds on 3 farms
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `farm` |
-| `breed` |
-| `lambclass` |
-| `y` |
+```@slate ../../notebooks/tables.jl lamb_births_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl lamb_births_data
+```
+
+The first 25 of 36 rows. `load_dataset("lamb_births")` returns them all.
 
 ## Usage
 

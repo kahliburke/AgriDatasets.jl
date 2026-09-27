@@ -1,8 +1,13 @@
-# eucalyptus_progenies
+# eucalyptus\_progenies
 
 ## Description
 
 Eucalyptus grandis Barbin (2013) progenies dataset
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl eucalyptus_progenies
+```
 
 ## Dataset information
 
@@ -15,14 +20,17 @@ Eucalyptus grandis Barbin (2013) progenies dataset
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=AgroR
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `trati` |
-| `bloc` |
-| `exp` |
-| `resp` |
+```@slate ../../notebooks/tables.jl eucalyptus_progenies_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl eucalyptus_progenies_data
+```
+
+The first 25 of 72 rows. `load_dataset("eucalyptus_progenies")` returns them all.
 
 ## Usage
 

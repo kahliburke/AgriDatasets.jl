@@ -1,8 +1,13 @@
-# soybean_cultivars
+# soybean\_cultivars
 
 ## Description
 
 Soybean cultivars experiment
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl soybean_cultivars
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Soybean cultivars experiment
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=AgroR
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `cult` |
-| `bloc` |
-| `prod` |
+```@slate ../../notebooks/tables.jl soybean_cultivars_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl soybean_cultivars_data
+```
+
+The first 25 of 40 rows. `load_dataset("soybean_cultivars")` returns them all.
 
 ## Usage
 

@@ -1,8 +1,13 @@
-# cork_tree_direction
+# cork\_tree\_direction
 
 ## Description
 
 Weight of cork samples on four sides of trees
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl cork_tree_direction
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Weight of cork samples on four sides of trees
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `tree` |
-| `dir` |
-| `y` |
+```@slate ../../notebooks/tables.jl cork_tree_direction_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl cork_tree_direction_data
+```
+
+The first 25 of 112 rows. `load_dataset("cork_tree_direction")` returns them all.
 
 ## Usage
 

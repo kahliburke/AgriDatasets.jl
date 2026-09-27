@@ -1,8 +1,13 @@
-# peach_uniformity
+# peach\_uniformity
 
 ## Description
 
 Uniformity trial of peach
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl peach_uniformity
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Uniformity trial of peach
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `row` |
-| `col` |
-| `yield` |
+```@slate ../../notebooks/tables.jl peach_uniformity_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl peach_uniformity_data
+```
+
+The first 25 of 144 rows. `load_dataset("peach_uniformity")` returns them all.
 
 ## Usage
 

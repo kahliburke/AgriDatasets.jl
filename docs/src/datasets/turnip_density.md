@@ -1,8 +1,13 @@
-# turnip_density
+# turnip\_density
 
 ## Description
 
 Density/spacing experiment for turnips in 3 blocks
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl turnip_density
+```
 
 ## Dataset information
 
@@ -15,14 +20,17 @@ Density/spacing experiment for turnips in 3 blocks
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `yield` |
-| `block` |
-| `spacing` |
-| `density` |
+```@slate ../../notebooks/tables.jl turnip_density_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl turnip_density_data
+```
+
+The first 25 of 60 rows. `load_dataset("turnip_density")` returns them all.
 
 ## Usage
 

@@ -1,8 +1,13 @@
-# strawberry_yield
+# strawberry\_yield
 
 ## Description
 
 RCB experiment of strawberry
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl strawberry_yield
+```
 
 ## Dataset information
 
@@ -15,15 +20,17 @@ RCB experiment of strawberry
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `row` |
-| `col` |
-| `block` |
-| `gen` |
-| `yield` |
+```@slate ../../notebooks/tables.jl strawberry_yield_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl strawberry_yield_data
+```
+
+The first 25 of 32 rows. `load_dataset("strawberry_yield")` returns them all.
 
 ## Usage
 

@@ -1,8 +1,13 @@
-# cowpea_maize_yield
+# cowpea\_maize\_yield
 
 ## Description
 
 Intercropping experiment of maize/cowpea
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl cowpea_maize_yield
+```
 
 ## Dataset information
 
@@ -15,16 +20,17 @@ Intercropping experiment of maize/cowpea
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `block` |
-| `nitro` |
-| `cowpea` |
-| `maize` |
-| `cyield` |
-| `myield` |
+```@slate ../../notebooks/tables.jl cowpea_maize_yield_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl cowpea_maize_yield_data
+```
+
+The first 25 of 72 rows. `load_dataset("cowpea_maize_yield")` returns them all.
 
 ## Usage
 

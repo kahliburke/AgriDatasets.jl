@@ -1,8 +1,13 @@
-# biological_control
+# biological\_control
 
 ## Description
 
 Biological pest control experiment
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl biological_control
+```
 
 ## Dataset information
 
@@ -15,12 +20,17 @@ Biological pest control experiment
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=Sleuth3
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Load` |
-| `Mass` |
+```@slate ../../notebooks/tables.jl biological_control_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl biological_control_data
+```
+
+All 15 rows.
 
 ## Usage
 

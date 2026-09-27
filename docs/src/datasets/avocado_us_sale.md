@@ -1,8 +1,15 @@
-# avocado_us_sale
+# avocado\_us\_sale
 
 ## Description
 
 Hass avocado weekly US sales
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl avocado_us_sale_pick
+```
+```@slate ../../notebooks/gallery.jl avocado_us_sale
+```
 
 ## Dataset information
 
@@ -15,21 +22,17 @@ Hass avocado weekly US sales
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=avocado
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `week_ending` |
-| `type` |
-| `avg_selling_price` |
-| `total_bulk_and_bags_units` |
-| `plu4046_units` |
-| `plu4225_units` |
-| `plu4770_units` |
-| `total_bagged_units` |
-| `sml_bagged_units` |
-| `lrg_bagged_units` |
-| `xlrg_bagged_units` |
+```@slate ../../notebooks/tables.jl avocado_us_sale_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl avocado_us_sale_data
+```
+
+The first 25 of 810 rows. `load_dataset("avocado_us_sale")` returns them all.
 
 ## Usage
 

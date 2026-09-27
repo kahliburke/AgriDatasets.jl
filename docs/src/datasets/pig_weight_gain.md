@@ -1,8 +1,13 @@
-# pig_weight_gain
+# pig\_weight\_gain
 
 ## Description
 
 Weight gain in pigs for different treatments
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl pig_weight_gain
+```
 
 ## Dataset information
 
@@ -15,20 +20,17 @@ Weight gain in pigs for different treatments
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `pen` |
-| `treatment` |
-| `pig` |
-| `sex` |
-| `weight1` |
-| `weight2` |
-| `feed` |
-| `w0` |
-| `g` |
-| `h` |
+```@slate ../../notebooks/tables.jl pig_weight_gain_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl pig_weight_gain_data
+```
+
+The first 25 of 30 rows. `load_dataset("pig_weight_gain")` returns them all.
 
 ## Usage
 

@@ -1,8 +1,13 @@
-# wheat_splitsplit
+# wheat\_splitsplit
 
 ## Description
 
 Split-split-plot experiment of wheat
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl wheat_splitsplit
+```
 
 ## Dataset information
 
@@ -15,19 +20,17 @@ Split-split-plot experiment of wheat
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `row` |
-| `col` |
-| `yield` |
-| `inoc` |
-| `trt` |
-| `gen` |
-| `dry` |
-| `dust` |
-| `block` |
+```@slate ../../notebooks/tables.jl wheat_splitsplit_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl wheat_splitsplit_data
+```
+
+The first 25 of 160 rows. `load_dataset("wheat_splitsplit")` returns them all.
 
 ## Usage
 

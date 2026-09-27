@@ -1,8 +1,13 @@
-# nitrofen_toxicity
+# nitrofen\_toxicity
 
 ## Description
 
 Toxicity of nitrofen in aquatic systems
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl nitrofen_toxicity
+```
 
 ## Dataset information
 
@@ -15,15 +20,17 @@ Toxicity of nitrofen in aquatic systems
 - **Original license:** Unlimited
 - **Source:** https://cran.r-project.org/package=boot
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `conc` |
-| `brood1` |
-| `brood2` |
-| `brood3` |
-| `total` |
+```@slate ../../notebooks/tables.jl nitrofen_toxicity_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl nitrofen_toxicity_data
+```
+
+The first 25 of 50 rows. `load_dataset("nitrofen_toxicity")` returns them all.
 
 ## Usage
 

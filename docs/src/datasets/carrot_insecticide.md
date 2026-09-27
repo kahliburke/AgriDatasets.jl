@@ -1,8 +1,13 @@
-# carrot_insecticide
+# carrot\_insecticide
 
 ## Description
 
 Insecticide treatments for carrot fly larvae
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl carrot_insecticide
+```
 
 ## Dataset information
 
@@ -15,16 +20,17 @@ Insecticide treatments for carrot fly larvae
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `treatment` |
-| `insecticide` |
-| `depth` |
-| `rep` |
-| `damaged` |
-| `total` |
+```@slate ../../notebooks/tables.jl carrot_insecticide_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl carrot_insecticide_data
+```
+
+The first 25 of 36 rows. `load_dataset("carrot_insecticide")` returns them all.
 
 ## Usage
 

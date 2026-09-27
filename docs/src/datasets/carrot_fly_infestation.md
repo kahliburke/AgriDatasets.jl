@@ -1,8 +1,13 @@
-# carrot_fly_infestation
+# carrot\_fly\_infestation
 
 ## Description
 
 Infestation of carrots by fly larvae
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl carrot_fly_infestation
+```
 
 ## Dataset information
 
@@ -15,15 +20,17 @@ Infestation of carrots by fly larvae
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `trt` |
-| `gen` |
-| `block` |
-| `n` |
-| `y` |
+```@slate ../../notebooks/tables.jl carrot_fly_infestation_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl carrot_fly_infestation_data
+```
+
+The first 25 of 96 rows. `load_dataset("carrot_fly_infestation")` returns them all.
 
 ## Usage
 

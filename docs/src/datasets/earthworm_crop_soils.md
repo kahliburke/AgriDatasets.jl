@@ -1,8 +1,13 @@
-# earthworm_crop_soils
+# earthworm\_crop\_soils
 
 ## Description
 
 Earthworms in cultivated soils
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl earthworm_crop_soils
+```
 
 ## Dataset information
 
@@ -15,15 +20,17 @@ Earthworms in cultivated soils
 - **Original license:** GPL-2
 - **Source:** https://cran.r-project.org/package=gpk
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Density` |
-| `Biomass` |
-| `Crop` |
-| `Year` |
-| `Soil` |
+```@slate ../../notebooks/tables.jl earthworm_crop_soils_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl earthworm_crop_soils_data
+```
+
+All 12 rows.
 
 ## Usage
 

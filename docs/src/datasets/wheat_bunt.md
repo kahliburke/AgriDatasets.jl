@@ -1,8 +1,13 @@
-# wheat_bunt
+# wheat\_bunt
 
 ## Description
 
 Fungus infection in varieties of wheat
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl wheat_bunt
+```
 
 ## Dataset information
 
@@ -15,14 +20,17 @@ Fungus infection in varieties of wheat
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `bunt` |
-| `pct` |
-| `rep` |
-| `gen` |
+```@slate ../../notebooks/tables.jl wheat_bunt_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl wheat_bunt_data
+```
+
+The first 25 of 400 rows. `load_dataset("wheat_bunt")` returns them all.
 
 ## Usage
 

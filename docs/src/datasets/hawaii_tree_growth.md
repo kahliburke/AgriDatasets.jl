@@ -1,8 +1,13 @@
-# hawaii_tree_growth
+# hawaii\_tree\_growth
 
 ## Description
 
 Diameter growth increments of a tropical tree species in Hawaii
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl hawaii_tree_growth
+```
 
 ## Dataset information
 
@@ -15,18 +20,17 @@ Diameter growth increments of a tropical tree species in Hawaii
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=biometrics
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `tree.code` |
-| `dbh` |
-| `toth` |
-| `crown.area` |
-| `comp.ind` |
-| `cai.1986` |
-| `cai.1987` |
-| `cai.1988` |
+```@slate ../../notebooks/tables.jl hawaii_tree_growth_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl hawaii_tree_growth_data
+```
+
+The first 25 of 63 rows. `load_dataset("hawaii_tree_growth")` returns them all.
 
 ## Usage
 

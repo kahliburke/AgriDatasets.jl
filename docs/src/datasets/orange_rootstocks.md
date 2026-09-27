@@ -1,8 +1,13 @@
-# orange_rootstocks
+# orange\_rootstocks
 
 ## Description
 
 Orange plants under different rootstocks
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl orange_rootstocks
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Orange plants under different rootstocks
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=AgroR
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `trat` |
-| `bloco` |
-| `resp` |
+```@slate ../../notebooks/tables.jl orange_rootstocks_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl orange_rootstocks_data
+```
+
+The first 25 of 27 rows. `load_dataset("orange_rootstocks")` returns them all.
 
 ## Usage
 

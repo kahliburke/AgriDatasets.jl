@@ -1,8 +1,13 @@
-# bamboo_growth
+# bamboo\_growth
 
 ## Description
 
 Data set relating growth of bamboo to geographic location
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl bamboo_growth
+```
 
 ## Dataset information
 
@@ -15,15 +20,17 @@ Data set relating growth of bamboo to geographic location
 - **Original license:** GPL-2
 - **Source:** https://cran.r-project.org/package=gpk
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Compartment` |
-| `Locality_Block` |
-| `Transect_Number` |
-| `Old_Shoots` |
-| `New_Shoots` |
+```@slate ../../notebooks/tables.jl bamboo_growth_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl bamboo_growth_data
+```
+
+The first 25 of 595 rows. `load_dataset("bamboo_growth")` returns them all.
 
 ## Usage
 

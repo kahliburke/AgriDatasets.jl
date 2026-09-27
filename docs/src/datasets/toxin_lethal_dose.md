@@ -1,8 +1,13 @@
-# toxin_lethal_dose
+# toxin\_lethal\_dose
 
 ## Description
 
 Identifying the lethal dose of a crop protection product
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl toxin_lethal_dose
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Identifying the lethal dose of a crop protection product
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=mcprofile
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `dose` |
-| `dead` |
-| `alive` |
+```@slate ../../notebooks/tables.jl toxin_lethal_dose_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl toxin_lethal_dose_data
+```
+
+All 6 rows.
 
 ## Usage
 

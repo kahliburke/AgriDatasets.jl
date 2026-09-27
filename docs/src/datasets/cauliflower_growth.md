@@ -1,8 +1,13 @@
-# cauliflower_growth
+# cauliflower\_growth
 
 ## Description
 
 Leaves for cauliflower plants at different times
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl cauliflower_growth
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Leaves for cauliflower plants at different times
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `year` |
-| `degdays` |
-| `leaves` |
+```@slate ../../notebooks/tables.jl cauliflower_growth_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl cauliflower_growth_data
+```
+
+All 14 rows.
 
 ## Usage
 

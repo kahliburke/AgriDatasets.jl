@@ -1,8 +1,13 @@
-# pollen_removal
+# pollen\_removal
 
 ## Description
 
 Pollen removal experiment
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl pollen_removal
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Pollen removal experiment
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=Sleuth3
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `PollenRemoved` |
-| `DurationOfVisit` |
-| `BeeType` |
+```@slate ../../notebooks/tables.jl pollen_removal_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl pollen_removal_data
+```
+
+The first 25 of 47 rows. `load_dataset("pollen_removal")` returns them all.
 
 ## Usage
 

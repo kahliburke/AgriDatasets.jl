@@ -1,8 +1,13 @@
-# willow_cutting_yield
+# willow\_cutting\_yield
 
 ## Description
 
 Effect of type and size of cutting on willow yield
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl willow_cutting_yield
+```
 
 ## Dataset information
 
@@ -15,16 +20,17 @@ Effect of type and size of cutting on willow yield
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=smbdata
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `ID` |
-| `Block` |
-| `Plot` |
-| `Type` |
-| `Size` |
-| `Yield` |
+```@slate ../../notebooks/tables.jl willow_cutting_yield_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl willow_cutting_yield_data
+```
+
+All 25 rows.
 
 ## Usage
 

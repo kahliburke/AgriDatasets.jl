@@ -1,8 +1,13 @@
-# timber_genetics
+# timber\_genetics
 
 ## Description
 
 Genetic and environmental components of tree characteristics
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl timber_genetics
+```
 
 ## Dataset information
 
@@ -15,20 +20,17 @@ Genetic and environmental components of tree characteristics
 - **Original license:** GPL-2
 - **Source:** https://cran.r-project.org/package=gpk
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Locality` |
-| `Year` |
-| `Replicate` |
-| `Subculture` |
-| `Elongation` |
-| `Multiples` |
-| `Rooting` |
-| `Germination` |
-| `Seed_Length` |
-| `Seed_Width` |
+```@slate ../../notebooks/tables.jl timber_genetics_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl timber_genetics_data
+```
+
+The first 25 of 224 rows. `load_dataset("timber_genetics")` returns them all.
 
 ## Usage
 

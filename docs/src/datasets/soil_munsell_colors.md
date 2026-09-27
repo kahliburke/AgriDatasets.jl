@@ -1,8 +1,13 @@
-# soil_munsell_colors
+# soil\_munsell\_colors
 
 ## Description
 
 Traditional soil color names
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl soil_munsell_colors
+```
 
 ## Dataset information
 
@@ -15,12 +20,17 @@ Traditional soil color names
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=aqp
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `munsell` |
-| `traditional_name` |
+```@slate ../../notebooks/tables.jl soil_munsell_colors_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl soil_munsell_colors_data
+```
+
+The first 25 of 482 rows. `load_dataset("soil_munsell_colors")` returns them all.
 
 ## Usage
 

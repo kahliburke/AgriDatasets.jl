@@ -1,8 +1,13 @@
-# tomato_insecticides
+# tomato\_insecticides
 
 ## Description
 
 Dataset created by Renzo Caceres Rossi on tomato insecticide treatments
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl tomato_insecticides
+```
 
 ## Dataset information
 
@@ -15,14 +20,17 @@ Dataset created by Renzo Caceres Rossi on tomato insecticide treatments
 - **Original license:** CC BY 4.0
 - **Source:** https://zenodo.org/records/21611429
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `insecticide_id` |
-| `product_name` |
-| `active_ingredient` |
-| `target_pest` |
+```@slate ../../notebooks/tables.jl tomato_insecticides_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl tomato_insecticides_data
+```
+
+All 15 rows.
 
 ## Usage
 

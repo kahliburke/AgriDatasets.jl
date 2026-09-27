@@ -1,8 +1,13 @@
-# fish_feeding
+# fish\_feeding
 
 ## Description
 
 Food consumption for fish
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl fish_feeding
+```
 
 ## Dataset information
 
@@ -15,16 +20,17 @@ Food consumption for fish
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=GLMsData
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Species` |
-| `MaxWt` |
-| `Temp` |
-| `AR` |
-| `Food` |
-| `FoodCon` |
+```@slate ../../notebooks/tables.jl fish_feeding_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl fish_feeding_data
+```
+
+The first 25 of 33 rows. `load_dataset("fish_feeding")` returns them all.
 
 ## Usage
 

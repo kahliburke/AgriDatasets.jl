@@ -1,8 +1,13 @@
-# corn_hybrid_density
+# corn\_hybrid\_density
 
 ## Description
 
 Corn hybrid density experiment
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl corn_hybrid_density
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Corn hybrid density experiment
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=AgroR
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `A` |
-| `B` |
-| `Resp` |
+```@slate ../../notebooks/tables.jl corn_hybrid_density_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl corn_hybrid_density_data
+```
+
+All 24 rows.
 
 ## Usage
 

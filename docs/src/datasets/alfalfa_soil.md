@@ -1,8 +1,13 @@
-# alfalfa_soil
+# alfalfa\_soil
 
 ## Description
 
 Alfalfa soil requirement for land evaluation
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl alfalfa_soil
+```
 
 ## Dataset information
 
@@ -15,18 +20,17 @@ Alfalfa soil requirement for land evaluation
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=ALUES
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `code` |
-| `s3_a` |
-| `s2_a` |
-| `s1_a` |
-| `s1_b` |
-| `s2_b` |
-| `s3_b` |
-| `wts` |
+```@slate ../../notebooks/tables.jl alfalfa_soil_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl alfalfa_soil_data
+```
+
+All 12 rows.
 
 ## Usage
 

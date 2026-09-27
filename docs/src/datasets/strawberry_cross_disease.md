@@ -1,8 +1,13 @@
-# strawberry_cross_disease
+# strawberry\_cross\_disease
 
 ## Description
 
 Ordered disease ratings of strawberry crosses
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl strawberry_cross_disease
+```
 
 ## Dataset information
 
@@ -15,15 +20,17 @@ Ordered disease ratings of strawberry crosses
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `male` |
-| `female` |
-| `block` |
-| `category` |
-| `count` |
+```@slate ../../notebooks/tables.jl strawberry_cross_disease_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl strawberry_cross_disease_data
+```
+
+The first 25 of 144 rows. `load_dataset("strawberry_cross_disease")` returns them all.
 
 ## Usage
 

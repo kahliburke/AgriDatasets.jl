@@ -1,8 +1,13 @@
-# tomato_uniformity
+# tomato\_uniformity
 
 ## Description
 
 Uniformity trial of tomato
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl tomato_uniformity
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Uniformity trial of tomato
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `row` |
-| `col` |
-| `yield` |
+```@slate ../../notebooks/tables.jl tomato_uniformity_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl tomato_uniformity_data
+```
+
+The first 25 of 180 rows. `load_dataset("tomato_uniformity")` returns them all.
 
 ## Usage
 

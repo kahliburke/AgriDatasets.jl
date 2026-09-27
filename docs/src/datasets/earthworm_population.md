@@ -1,8 +1,13 @@
-# earthworm_population
+# earthworm\_population
 
 ## Description
 
 Population dynamics of earthworms
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl earthworm_population
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Population dynamics of earthworms
 - **Original license:** GPL-2
 - **Source:** https://cran.r-project.org/package=gpk
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Month` |
-| `Density` |
-| `Biomass` |
+```@slate ../../notebooks/tables.jl earthworm_population_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl earthworm_population_data
+```
+
+The first 25 of 46 rows. `load_dataset("earthworm_population")` returns them all.
 
 ## Usage
 

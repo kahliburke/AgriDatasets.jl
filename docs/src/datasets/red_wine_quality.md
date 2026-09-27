@@ -1,8 +1,15 @@
-# red_wine_quality
+# red\_wine\_quality
 
 ## Description
 
 Red wine characteristics and quality
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl red_wine_quality_pick
+```
+```@slate ../../notebooks/gallery.jl red_wine_quality
+```
 
 ## Dataset information
 
@@ -15,22 +22,17 @@ Red wine characteristics and quality
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=live
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `fixed_acidity` |
-| `volatile_acidity` |
-| `citric_acid` |
-| `residual_sugar` |
-| `chlorides` |
-| `free_sulfur_dioxide` |
-| `total_sulfur_dioxide` |
-| `density` |
-| `pH` |
-| `sulphates` |
-| `alcohol` |
-| `quality` |
+```@slate ../../notebooks/tables.jl red_wine_quality_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl red_wine_quality_data
+```
+
+The first 25 of 1,599 rows. `load_dataset("red_wine_quality")` returns them all.
 
 ## Usage
 

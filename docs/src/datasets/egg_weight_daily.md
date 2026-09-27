@@ -1,8 +1,13 @@
-# egg_weight_daily
+# egg\_weight\_daily
 
 ## Description
 
 Sample of egg weights on 24 consecutive days
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl egg_weight_daily
+```
 
 ## Dataset information
 
@@ -15,12 +20,17 @@ Sample of egg weights on 24 consecutive days
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `day` |
-| `weight` |
+```@slate ../../notebooks/tables.jl egg_weight_daily_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl egg_weight_daily_data
+```
+
+The first 25 of 240 rows. `load_dataset("egg_weight_daily")` returns them all.
 
 ## Usage
 

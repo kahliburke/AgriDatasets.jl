@@ -1,8 +1,13 @@
-# eelworm_fumigation
+# eelworm\_fumigation
 
 ## Description
 
 Counts of eelworms before and after fumigant treatments
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl eelworm_fumigation
+```
 
 ## Dataset information
 
@@ -15,20 +20,17 @@ Counts of eelworms before and after fumigant treatments
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `block` |
-| `row` |
-| `col` |
-| `fumigant` |
-| `dose` |
-| `initial` |
-| `final` |
-| `grain` |
-| `straw` |
-| `weeds` |
+```@slate ../../notebooks/tables.jl eelworm_fumigation_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl eelworm_fumigation_data
+```
+
+The first 25 of 48 rows. `load_dataset("eelworm_fumigation")` returns them all.
 
 ## Usage
 

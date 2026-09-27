@@ -1,8 +1,13 @@
-# apple_uniformity
+# apple\_uniformity
 
 ## Description
 
 Uniformity trial in apple
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl apple_uniformity
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Uniformity trial in apple
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `row` |
-| `col` |
-| `yield` |
+```@slate ../../notebooks/tables.jl apple_uniformity_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl apple_uniformity_data
+```
+
+The first 25 of 198 rows. `load_dataset("apple_uniformity")` returns them all.
 
 ## Usage
 

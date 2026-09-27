@@ -1,8 +1,13 @@
-# coffee_production
+# coffee\_production
 
 ## Description
 
 World coffee production data
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl coffee_production
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ World coffee production data
 - **Original license:** CC0
 - **Source:** https://cran.r-project.org/package=spData
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `name_long` |
-| `coffee_production_2016` |
-| `coffee_production_2017` |
+```@slate ../../notebooks/tables.jl coffee_production_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl coffee_production_data
+```
+
+The first 25 of 47 rows. `load_dataset("coffee_production")` returns them all.
 
 ## Usage
 

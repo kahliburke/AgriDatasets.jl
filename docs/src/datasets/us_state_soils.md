@@ -1,8 +1,13 @@
-# us_state_soils
+# us\_state\_soils
 
 ## Description
 
 US state soils
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl us_state_soils
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ US state soils
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=aqp
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `state` |
-| `abbreviated` |
-| `series` |
+```@slate ../../notebooks/tables.jl us_state_soils_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl us_state_soils_data
+```
+
+The first 25 of 52 rows. `load_dataset("us_state_soils")` returns them all.
 
 ## Usage
 

@@ -1,8 +1,13 @@
-# robusta_terrain
+# robusta\_terrain
 
 ## Description
 
 Robusta coffee terrain requirement for land evaluation
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl robusta_terrain
+```
 
 ## Dataset information
 
@@ -15,18 +20,17 @@ Robusta coffee terrain requirement for land evaluation
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=ALUES
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `code` |
-| `s3_a` |
-| `s2_a` |
-| `s1_a` |
-| `s1_b` |
-| `s2_b` |
-| `s3_b` |
-| `wts` |
+```@slate ../../notebooks/tables.jl robusta_terrain_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl robusta_terrain_data
+```
+
+All 5 rows.
 
 ## Usage
 

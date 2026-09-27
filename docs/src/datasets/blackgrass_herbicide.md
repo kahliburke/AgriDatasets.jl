@@ -1,8 +1,13 @@
-# blackgrass_herbicide
+# blackgrass\_herbicide
 
 ## Description
 
 Herbicide efficacy
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl blackgrass_herbicide
+```
 
 ## Dataset information
 
@@ -15,17 +20,17 @@ Herbicide efficacy
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=smbdata
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `ID` |
-| `Rep` |
-| `DPot` |
-| `Population` |
-| `Type` |
-| `Herbicide` |
-| `Fwt` |
+```@slate ../../notebooks/tables.jl blackgrass_herbicide_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl blackgrass_herbicide_data
+```
+
+The first 25 of 135 rows. `load_dataset("blackgrass_herbicide")` returns them all.
 
 ## Usage
 

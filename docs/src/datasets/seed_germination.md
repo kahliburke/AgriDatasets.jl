@@ -1,8 +1,13 @@
-# seed_germination
+# seed\_germination
 
 ## Description
 
 Seed germination with different temperatures/concentrations
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl seed_germination
+```
 
 ## Dataset information
 
@@ -15,15 +20,17 @@ Seed germination with different temperatures/concentrations
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `temp` |
-| `rep` |
-| `conc` |
-| `germ` |
-| `seeds` |
+```@slate ../../notebooks/tables.jl seed_germination_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl seed_germination_data
+```
+
+The first 25 of 64 rows. `load_dataset("seed_germination")` returns them all.
 
 ## Usage
 

@@ -1,8 +1,13 @@
-# grape_uniformity
+# grape\_uniformity
 
 ## Description
 
 Uniformity trial of grape
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl grape_uniformity
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ Uniformity trial of grape
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=agridat
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `row` |
-| `col` |
-| `yield` |
+```@slate ../../notebooks/tables.jl grape_uniformity_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl grape_uniformity_data
+```
+
+The first 25 of 155 rows. `load_dataset("grape_uniformity")` returns them all.
 
 ## Usage
 

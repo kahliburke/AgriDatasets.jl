@@ -1,8 +1,13 @@
-# guinea_pig_sleep
+# guinea\_pig\_sleep
 
 ## Description
 
 Sleep times for guinea pigs
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl guinea_pig_sleep
+```
 
 ## Dataset information
 
@@ -15,12 +20,17 @@ Sleep times for guinea pigs
 - **Original license:** GPL (>= 2)
 - **Source:** https://cran.r-project.org/package=GLMsData
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Dose` |
-| `Sleep` |
+```@slate ../../notebooks/tables.jl guinea_pig_sleep_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl guinea_pig_sleep_data
+```
+
+The first 25 of 30 rows. `load_dataset("guinea_pig_sleep")` returns them all.
 
 ## Usage
 

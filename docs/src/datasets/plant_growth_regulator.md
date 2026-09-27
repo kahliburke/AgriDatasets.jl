@@ -1,8 +1,13 @@
-# plant_growth_regulator
+# plant\_growth\_regulator
 
 ## Description
 
 Plant heights in glasshouse
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl plant_growth_regulator
+```
 
 ## Dataset information
 
@@ -15,15 +20,17 @@ Plant heights in glasshouse
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=smbdata
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Pot` |
-| `Row` |
-| `Column` |
-| `Dose` |
-| `Height` |
+```@slate ../../notebooks/tables.jl plant_growth_regulator_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl plant_growth_regulator_data
+```
+
+All 24 rows.
 
 ## Usage
 

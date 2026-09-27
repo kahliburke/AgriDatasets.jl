@@ -1,8 +1,13 @@
-# hawaii_plant_size
+# hawaii\_plant\_size
 
 ## Description
 
 Maximum plant size in the Hawaiian archipelago
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl hawaii_plant_size
+```
 
 ## Dataset information
 
@@ -15,16 +20,17 @@ Maximum plant size in the Hawaiian archipelago
 - **Original license:** GPL (>= 3)
 - **Source:** https://cran.r-project.org/package=biometrics
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `species` |
-| `family` |
-| `native.status` |
-| `n` |
-| `d95` |
-| `dmax3` |
+```@slate ../../notebooks/tables.jl hawaii_plant_size_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl hawaii_plant_size_data
+```
+
+The first 25 of 58 rows. `load_dataset("hawaii_plant_size")` returns them all.
 
 ## Usage
 

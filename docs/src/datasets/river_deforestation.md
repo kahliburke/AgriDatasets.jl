@@ -1,8 +1,13 @@
-# river_deforestation
+# river\_deforestation
 
 ## Description
 
 River deforestation: air and water temperatures before/after
+
+## Visualization
+
+```@slate ../../notebooks/gallery.jl river_deforestation
+```
 
 ## Dataset information
 
@@ -15,13 +20,17 @@ River deforestation: air and water temperatures before/after
 - **Original license:** MIT + file LICENSE
 - **Source:** https://cran.r-project.org/package=EnTraineR
 
-## Variables
+## Columns
 
-| Variable |
-|---|
-| `Temp_water` |
-| `Temp_air` |
-| `Deforestation` |
+```@slate ../../notebooks/tables.jl river_deforestation_columns
+```
+
+## Data
+
+```@slate ../../notebooks/tables.jl river_deforestation_data
+```
+
+The first 25 of 56 rows. `load_dataset("river_deforestation")` returns them all.
 
 ## Usage
 
