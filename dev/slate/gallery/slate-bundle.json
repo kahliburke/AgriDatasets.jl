@@ -1,0 +1,1008 @@
+{
+ "assets": {
+  "data/avocado_kind_replay-4743dfe4.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "avocado_kind_replay",
+   "order": "col",
+   "path": "data/avocado_kind_replay-4743dfe4.f64.bin",
+   "shape": [
+    405,
+    2,
+    2
+   ],
+   "url": "data/avocado_kind_replay-4743dfe4.f64.bin"
+  },
+  "data/avocado_kind_replay-ad3bcfde.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "avocado_kind_replay",
+   "order": "col",
+   "path": "data/avocado_kind_replay-ad3bcfde.f64.bin",
+   "shape": [
+    405,
+    2,
+    2
+   ],
+   "url": "data/avocado_kind_replay-ad3bcfde.f64.bin"
+  },
+  "data/coffee_measure_replay-a5422f06.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "coffee_measure_replay",
+   "order": "col",
+   "path": "data/coffee_measure_replay-a5422f06.f64.bin",
+   "shape": [
+    7,
+    2,
+    10
+   ],
+   "url": "data/coffee_measure_replay-a5422f06.f64.bin"
+  },
+  "data/coffee_measure_replay-e1c90d59.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "coffee_measure_replay",
+   "order": "col",
+   "path": "data/coffee_measure_replay-e1c90d59.f64.bin",
+   "shape": [
+    36,
+    2,
+    10
+   ],
+   "url": "data/coffee_measure_replay-e1c90d59.f64.bin"
+  },
+  "data/rice_measure_replay-1a7f8e7c.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "rice_measure_replay",
+   "order": "col",
+   "path": "data/rice_measure_replay-1a7f8e7c.f64.bin",
+   "shape": [
+    53,
+    3
+   ],
+   "url": "data/rice_measure_replay-1a7f8e7c.f64.bin"
+  },
+  "data/rice_measure_replay-5a58e98a.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "rice_measure_replay",
+   "order": "col",
+   "path": "data/rice_measure_replay-5a58e98a.f64.bin",
+   "shape": [
+    53,
+    3
+   ],
+   "url": "data/rice_measure_replay-5a58e98a.f64.bin"
+  },
+  "data/wine_measure_replay-25510dde.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "wine_measure_replay",
+   "order": "col",
+   "path": "data/wine_measure_replay-25510dde.f64.bin",
+   "shape": [
+    1599,
+    2,
+    11
+   ],
+   "url": "data/wine_measure_replay-25510dde.f64.bin"
+  },
+  "data/wine_measure_replay-c54d3321.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "wine_measure_replay",
+   "order": "col",
+   "path": "data/wine_measure_replay-c54d3321.f64.bin",
+   "shape": [
+    6,
+    2,
+    11
+   ],
+   "url": "data/wine_measure_replay-c54d3321.f64.bin"
+  }
+ },
+ "cells": [
+  {
+   "file": "cells/intro.json",
+   "id": "intro",
+   "kind": "markdown",
+   "markdown": "# Dataset gallery\n\nOne chart for each dataset in AgriDatasets, each cell named after the dataset it draws. The dataset\npages of the documentation show them.",
+   "native": true,
+   "output": true,
+   "tags": []
+  },
+  {
+   "file": "cells/setup.json",
+   "hidecode": false,
+   "id": "setup",
+   "kind": "code",
+   "output": true,
+   "source": "using AgriDatasets, DataFrames, Statistics, Dates, AgriViz\n\n# A proportion column: `k` of `n`.\nshare(df, k, n) = transform(df, [k, n] => ByRow((a, b) -> b > 0 ? a / b : missing) => :proportion)",
+   "tags": [
+    "import_scaffold"
+   ]
+  },
+  {
+   "file": "cells/alfalfa_soil.json",
+   "hidecode": false,
+   "id": "alfalfa_soil",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; suitability(load_dataset(\"alfalfa_soil\"))...)",
+   "tags": []
+  },
+  {
+   "file": "cells/apple_canker.json",
+   "hidecode": false,
+   "id": "apple_canker",
+   "kind": "code",
+   "output": true,
+   "source": "let df = share(load_dataset(\"apple_canker\"), :y, :n)\n    echart(; curve(combine(groupby(df, [:gen, :inoculum]), :proportion => mean => :proportion),\n                   :inoculum, :proportion; group = :gen)...)\nend",
+   "tags": []
+  },
+  {
+   "file": "cells/apple_uniformity.json",
+   "hidecode": false,
+   "id": "apple_uniformity",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; fieldmap(load_dataset(\"apple_uniformity\"), :col, :row, :yield)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_soil.json",
+   "hidecode": false,
+   "id": "arabica_soil",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; suitability(load_dataset(\"arabica_soil\"))...)",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_temp.json",
+   "hidecode": false,
+   "id": "arabica_temp",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; suitability(load_dataset(\"arabica_temp\"))...)",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_terrain.json",
+   "hidecode": false,
+   "id": "arabica_terrain",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; suitability(load_dataset(\"arabica_terrain\"))...)",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_water.json",
+   "hidecode": false,
+   "id": "arabica_water",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; suitability(load_dataset(\"arabica_water\"))...)",
+   "tags": []
+  },
+  {
+   "file": "cells/avocado_us_sale_pick.json",
+   "hidecode": true,
+   "id": "avocado_us_sale_pick",
+   "kind": "code",
+   "output": true,
+   "source": "@bind avocado_kind Radio([\"Conventional\", \"Organic\"], \"Conventional\"; label = \"avocados\")",
+   "tags": []
+  },
+  {
+   "file": "cells/avocado_us_sale.json",
+   "hidecode": false,
+   "id": "avocado_us_sale",
+   "kind": "code",
+   "output": true,
+   "source": "# Weekly price and units sold for the chosen kind, on two stacked panels that share the time axis.\nlet df = sort(load_dataset(\"avocado_us_sale\"), :week_ending)\n    ms(d) = 1000 * Dates.datetime2unix(DateTime(d))     # a time axis takes milliseconds since 1970\n    pts(k, c, scale) = (r = df[df.type .== k, :];\n                        [[ms(d), round(v / scale; sigdigits = 4)] for (d, v) in zip(r.week_ending, r[!, c])])\n    echart(;\n        grid = [(left = 64, right = 24, top = 16, height = 150), (left = 64, right = 24, top = 206, height = 110)],\n        xAxis = [(type = :time, gridIndex = 0, axisLabel = (show = false,)), (type = :time, gridIndex = 1)],\n        yAxis = [(valaxis(\"price (US\\$)\")..., gridIndex = 0, nameGap = 44),\n                 (valaxis(\"units sold (millions)\")..., gridIndex = 1, nameGap = 44)],\n        axisPointer = (link = [(xAxisIndex = :all,)],),\n        tooltip = (trigger = :axis,),\n        series = [(type = :line, name = \"price\", showSymbol = false, lineStyle = (width = 1.5,),\n                   data = @replay(avocado_kind, pts(avocado_kind, :avg_selling_price, 1))),\n                  (type = :line, name = \"units sold\", xAxisIndex = 1, yAxisIndex = 1, showSymbol = false,\n                   lineStyle = (width = 1.5,), areaStyle = (opacity = 0.15,),\n                   data = @replay(avocado_kind, pts(avocado_kind, :total_bulk_and_bags_units, 1e6)))],\n        height = 360,\n        modes(m -> (color = fill(CATEGORICAL[m][1], 2),))...,\n    )\nend",
+   "tags": [
+    "macrocall"
+   ]
+  },
+  {
+   "file": "cells/bamboo_growth.json",
+   "hidecode": false,
+   "id": "bamboo_growth",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"bamboo_growth\"), :Old_Shoots, :New_Shoots; bubbles = true, size = 5)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/biological_control.json",
+   "hidecode": false,
+   "id": "biological_control",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"biological_control\"), :Load, :Mass; size = 10)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/bird_grazing.json",
+   "hidecode": false,
+   "id": "bird_grazing",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"bird_grazing\"), :Grazed, :Birds; group = :When)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/black_duck_survival.json",
+   "hidecode": false,
+   "id": "black_duck_survival",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"black_duck_survival\"), :weight, :time; group = :status)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/blackgrass_herbicide.json",
+   "hidecode": false,
+   "id": "blackgrass_herbicide",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"blackgrass_herbicide\"), :Population, :Fwt; group = :Herbicide)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/broiler_growth.json",
+   "hidecode": false,
+   "id": "broiler_growth",
+   "kind": "code",
+   "output": true,
+   "source": "let df = load_dataset(\"broiler_growth\")\n    long = stack(df[:, [:age, :bw, :targetbw]], [:bw, :targetbw]; variable_name = :weight)\n    long.weight = replace(long.weight, \"bw\" => \"body weight\", \"targetbw\" => \"target\")\n    echart(; curve(long, :age, :value; group = :weight)...)\nend",
+   "tags": []
+  },
+  {
+   "file": "cells/budworm_pyrethroid.json",
+   "hidecode": false,
+   "id": "budworm_pyrethroid",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; curve(share(load_dataset(\"budworm_pyrethroid\"), :Killed, :Number), :Dose, :proportion;\n               group = :Gender, logx = true)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/carrot_fly_infestation.json",
+   "hidecode": false,
+   "id": "carrot_fly_infestation",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(share(load_dataset(\"carrot_fly_infestation\"), :y, :n), :gen, :proportion; group = :trt)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/carrot_insecticide.json",
+   "hidecode": false,
+   "id": "carrot_insecticide",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(share(load_dataset(\"carrot_insecticide\"), :damaged, :total), :treatment, :proportion;\n              group = :insecticide)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/cattle_butterfat.json",
+   "hidecode": false,
+   "id": "cattle_butterfat",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"cattle_butterfat\"), :Breed, :Butterfat; group = :Age)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/cauliflower_growth.json",
+   "hidecode": false,
+   "id": "cauliflower_growth",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; curve(load_dataset(\"cauliflower_growth\"), :degdays, :leaves; group = :year)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/coffee_composition_pick.json",
+   "hidecode": true,
+   "id": "coffee_composition_pick",
+   "kind": "code",
+   "output": true,
+   "source": "@bind coffee_measure Select([\"Caffine\" => \"caffeine\", \"Trigonelline\" => \"trigonelline\",\n                             \"Chlorogenic Acid\" => \"chlorogenic acid\", \"Fat\" => \"fat\",\n                             \"Extract Yield\" => \"extract yield\", \"ph Value\" => \"pH\", \"Water\" => \"water\",\n                             \"Bean Weight\" => \"bean weight\", \"Mineral Content\" => \"mineral content\",\n                             \"Free Acid\" => \"free acid\"], \"Caffine\"; label = \"measure\")",
+   "tags": []
+  },
+  {
+   "file": "cells/coffee_composition.json",
+   "hidecode": false,
+   "id": "coffee_composition",
+   "kind": "code",
+   "output": true,
+   "source": "# The chosen measure for each sample, arabica against robusta.\nlet df = load_dataset(\"coffee_composition\")\n    kinds = unique(df.Variety)\n    pts(k, c) = [[x, i - 1 + 0.3 * (((j * 0.618034) % 1) - 0.5)] for (i, v) in enumerate(kinds)\n                 for (j, x) in enumerate(df[df.Variety .== v, c]) if v == k]\n    echart(;\n        grid = (left = 16, right = 24, top = 32, bottom = 44, containLabel = true),\n        legend = (data = String.(kinds), top = 0),\n        xAxis = valaxis(\"value\"),\n        yAxis = [cataxis(\"\", String.(kinds); boundaryGap = true, axisLine = (show = false,)),\n                 (type = :value, min = -0.5, max = length(kinds) - 0.5, show = false)],\n        tooltip = (trigger = :item, formatter = \"{a}: {@[0]}\"),\n        series = [(type = :scatter, name = String(k), yAxisIndex = 1, symbolSize = 10, itemStyle = (opacity = 0.8,),\n                   data = @replay(coffee_measure, pts(k, coffee_measure.value))) for k in kinds],\n        height = 220,\n        modes(m -> (color = CATEGORICAL[m][1:2],))...,\n    )\nend",
+   "tags": [
+    "macrocall"
+   ]
+  },
+  {
+   "file": "cells/coffee_production.json",
+   "hidecode": false,
+   "id": "coffee_production",
+   "kind": "code",
+   "output": true,
+   "source": "let df = load_dataset(\"coffee_production\")\n    echart(; dumbbell(df.name_long, df.coffee_production_2016, df.coffee_production_2017;\n                      names = (\"2016\", \"2017\"))...)\nend",
+   "tags": []
+  },
+  {
+   "file": "cells/cork_tree_direction.json",
+   "hidecode": false,
+   "id": "cork_tree_direction",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"cork_tree_direction\"), :dir, :y)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/corn_hybrid_density.json",
+   "hidecode": false,
+   "id": "corn_hybrid_density",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"corn_hybrid_density\"), :A, :Resp; group = :B)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/cotton_pesticide.json",
+   "hidecode": false,
+   "id": "cotton_pesticide",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"cotton_pesticide\"), :H, :Weight; group = :I)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/cowpea_maize_yield.json",
+   "hidecode": false,
+   "id": "cowpea_maize_yield",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"cowpea_maize_yield\"), :nitro, :myield; group = :cowpea)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/cows_insemination.json",
+   "hidecode": false,
+   "id": "cows_insemination",
+   "kind": "code",
+   "output": true,
+   "source": "let df = load_dataset(\"cows_insemination\")\n    long = vcat([DataFrame(Time = df.Time, centre = \"C$k\",\n                           rate = df[!, \"Sillod_Conception_C$k\"] ./ df[!, \"Sillod_Insemination_C$k\"]) for k in 1:3]...)\n    echart(; curve(long, :Time, :rate; group = :centre, xtype = :category)...)\nend",
+   "tags": []
+  },
+  {
+   "file": "cells/earthworm_crop_soils.json",
+   "hidecode": false,
+   "id": "earthworm_crop_soils",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"earthworm_crop_soils\"), :Density, :Biomass; group = :Crop, size = 10)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/earthworm_population.json",
+   "hidecode": false,
+   "id": "earthworm_population",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; curve(load_dataset(\"earthworm_population\"), :Month, :Density; xtype = :category, area = true)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/eelworm_fumigation.json",
+   "hidecode": false,
+   "id": "eelworm_fumigation",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; fieldmap(load_dataset(\"eelworm_fumigation\"), :col, :row, :grain; label = :fumigant)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/egg_weight_daily.json",
+   "hidecode": false,
+   "id": "egg_weight_daily",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"egg_weight_daily\"), :day, :weight; size = 6)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/eucalyptus_progenies.json",
+   "hidecode": false,
+   "id": "eucalyptus_progenies",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"eucalyptus_progenies\"), :trati, :resp; group = :exp)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/fish_feeding.json",
+   "hidecode": false,
+   "id": "fish_feeding",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"fish_feeding\"), :MaxWt, :FoodCon; group = :Food, logx = true, logy = true, size = 10)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/fungicide_latin_square.json",
+   "hidecode": false,
+   "id": "fungicide_latin_square",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; fieldmap(load_dataset(\"fungicide_latin_square\"), :col, :row, :yield; label = :trt)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/grape_uniformity.json",
+   "hidecode": false,
+   "id": "grape_uniformity",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; fieldmap(load_dataset(\"grape_uniformity\"), :col, :row, :yield)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/guinea_pig_sleep.json",
+   "hidecode": false,
+   "id": "guinea_pig_sleep",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"guinea_pig_sleep\"), :Dose, :Sleep; size = 10)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/hawaii_plant_size.json",
+   "hidecode": false,
+   "id": "hawaii_plant_size",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"hawaii_plant_size\"), :d95, :dmax3; group = Symbol(\"native.status\"),\n                 logx = true, logy = true)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/hawaii_tree_growth.json",
+   "hidecode": false,
+   "id": "hawaii_tree_growth",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"hawaii_tree_growth\"), :dbh, :toth)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/idn_rice_farms.json",
+   "hidecode": false,
+   "id": "idn_rice_farms",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"idn_rice_farms\"), :size, :goutput; group = :region, logx = true, logy = true,\n                 size = 6)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/kiwi_crop_design.json",
+   "hidecode": false,
+   "id": "kiwi_crop_design",
+   "kind": "code",
+   "output": true,
+   "source": "load_dataset(\"kiwi_crop_design\")",
+   "tags": []
+  },
+  {
+   "file": "cells/lady_bird_fungus.json",
+   "hidecode": false,
+   "id": "lady_bird_fungus",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"lady_bird_fungus\"), :Host, :Infected; group = :Ladybird)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/lamb_births.json",
+   "hidecode": false,
+   "id": "lamb_births",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"lamb_births\"), :lambclass, :y; group = :breed)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/nitrofen_toxicity.json",
+   "hidecode": false,
+   "id": "nitrofen_toxicity",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"nitrofen_toxicity\"), :conc, :total)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/orange_rootstocks.json",
+   "hidecode": false,
+   "id": "orange_rootstocks",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"orange_rootstocks\"), :trat, :resp)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/peach_uniformity.json",
+   "hidecode": false,
+   "id": "peach_uniformity",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; fieldmap(load_dataset(\"peach_uniformity\"), :col, :row, :yield)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/pig_weight_gain.json",
+   "hidecode": false,
+   "id": "pig_weight_gain",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"pig_weight_gain\"), :treatment, :g; group = :sex)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/plant_growth_regulator.json",
+   "hidecode": false,
+   "id": "plant_growth_regulator",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; fieldmap(load_dataset(\"plant_growth_regulator\"), :Column, :Row, :Height; label = :Dose)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/pollen_removal.json",
+   "hidecode": false,
+   "id": "pollen_removal",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"pollen_removal\"), :DurationOfVisit, :PollenRemoved; group = :BeeType)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/potato_scab_sulfur.json",
+   "hidecode": false,
+   "id": "potato_scab_sulfur",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; fieldmap(load_dataset(\"potato_scab_sulfur\"), :col, :row, :inf; label = :trt)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/rabbit_body_mass.json",
+   "hidecode": false,
+   "id": "rabbit_body_mass",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"rabbit_body_mass\"), :Hind_Foot_Length, :Body_Weight)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/red_wine_quality_pick.json",
+   "hidecode": true,
+   "id": "red_wine_quality_pick",
+   "kind": "code",
+   "output": true,
+   "source": "@bind wine_measure Select([\"alcohol\", \"volatile_acidity\", \"sulphates\", \"citric_acid\", \"fixed_acidity\",\n                           \"residual_sugar\", \"chlorides\", \"free_sulfur_dioxide\", \"total_sulfur_dioxide\",\n                           \"density\", \"pH\"] .=> [\"alcohol\", \"volatile acidity\", \"sulphates\", \"citric acid\",\n                           \"fixed acidity\", \"residual sugar\", \"chlorides\", \"free SO₂\", \"total SO₂\", \"density\", \"pH\"],\n                          \"alcohol\"; label = \"measure\")",
+   "tags": []
+  },
+  {
+   "file": "cells/red_wine_quality.json",
+   "hidecode": false,
+   "id": "red_wine_quality",
+   "kind": "code",
+   "output": true,
+   "source": "# Every wine's value of the chosen measure against its quality score, with the mean at each score.\nlet df = load_dataset(\"red_wine_quality\")\n    qs = sort(unique(df.quality))\n    jit(j) = 0.3 * (((j * 0.618034) % 1) - 0.5)\n    pts(c) = [[q - first(qs) + jit(j), x] for (j, (q, x)) in enumerate(zip(df.quality, df[!, c]))]\n    means(c) = [[i - 1, round(mean(df[df.quality .== q, c]); sigdigits = 4)] for (i, q) in enumerate(qs)]\n    echart(;\n        grid = (left = 16, right = 24, top = 16, bottom = 44, containLabel = true),\n        xAxis = [cataxis(\"quality score\", string.(qs); boundaryGap = true, axisLine = (show = false,)),\n                 (type = :value, min = -0.5, max = length(qs) - 0.5, show = false)],\n        yAxis = valaxis(\"value\"),\n        tooltip = (trigger = :item, formatter = \"{@[1]}\"),\n        series = [(type = :scatter, name = \"wines\", xAxisIndex = 1, symbolSize = 5, itemStyle = (opacity = 0.35,),\n                   large = true, data = @replay(wine_measure, pts(wine_measure.value))),\n                  (type = :scatter, name = \"mean\", xAxisIndex = 1, symbol = :rect, symbolSize = [24, 3], z = 4,\n                   data = @replay(wine_measure, means(wine_measure.value)))],\n        height = 340,\n        modes(m -> (series = [(itemStyle = (color = CATEGORICAL[m][1],),), (itemStyle = (color = INK[m].primary,),)],))...,\n    )\nend",
+   "tags": [
+    "macrocall"
+   ]
+  },
+  {
+   "file": "cells/rice_wheat_production_pick.json",
+   "hidecode": true,
+   "id": "rice_wheat_production_pick",
+   "kind": "code",
+   "output": true,
+   "source": "@bind rice_measure Radio([\"Production\", \"Area\", \"Yield\"], \"Production\"; label = \"measure\")",
+   "tags": []
+  },
+  {
+   "file": "cells/rice_wheat_production.json",
+   "hidecode": false,
+   "id": "rice_wheat_production",
+   "kind": "code",
+   "output": true,
+   "source": "# Values alone, in the year axis's order. Two year labels are written differently for rice\n# (\"1999-01\" for 2000-01, \"2002-03*\"), so labels are normalised before the crops are lined up.\nlet df = transform(load_dataset(\"rice_wheat_production\"),\n                   :Year => ByRow(y -> replace(String(y), \"*\" => \"\", \"1999-01\" => \"2000-01\")) => :Year)\n    crops = unique(df.Food)\n    years = sort(unique(df.Year))\n    pts(k, c) = (r = df[df.Food .== k, :]; at = Dict(zip(r.Year, r[!, c])); [at[y] for y in years])\n    echart(;\n        grid = (left = 24, right = 64, top = 32, bottom = 44, containLabel = true),\n        legend = (data = String.(crops), top = 0),\n        xAxis = cataxis(\"year\", years; boundaryGap = false),\n        yAxis = (valaxis(\"\")..., scale = false),\n        tooltip = (trigger = :axis,),\n        series = [(type = :line, name = String(k), showSymbol = false, lineStyle = (width = 2,),\n                   data = @replay(rice_measure, pts(k, rice_measure))) for k in crops],\n        height = 340,\n        modes(m -> (color = CATEGORICAL[m][1:2],))...,\n    )\nend",
+   "tags": [
+    "macrocall"
+   ]
+  },
+  {
+   "file": "cells/river_deforestation.json",
+   "hidecode": false,
+   "id": "river_deforestation",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"river_deforestation\"), :Temp_air, :Temp_water; group = :Deforestation)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_soil.json",
+   "hidecode": false,
+   "id": "robusta_soil",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; suitability(load_dataset(\"robusta_soil\"))...)",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_temp.json",
+   "hidecode": false,
+   "id": "robusta_temp",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; suitability(load_dataset(\"robusta_temp\"))...)",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_terrain.json",
+   "hidecode": false,
+   "id": "robusta_terrain",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; suitability(load_dataset(\"robusta_terrain\"))...)",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_water.json",
+   "hidecode": false,
+   "id": "robusta_water",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; suitability(load_dataset(\"robusta_water\"))...)",
+   "tags": []
+  },
+  {
+   "file": "cells/seed_germination.json",
+   "hidecode": false,
+   "id": "seed_germination",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(share(load_dataset(\"seed_germination\"), :germ, :seeds), :conc, :proportion; group = :temp)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/soil_munsell_colors.json",
+   "hidecode": false,
+   "id": "soil_munsell_colors",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; counts(load_dataset(\"soil_munsell_colors\").traditional_name; name = \"Munsell colours\")...)",
+   "tags": []
+  },
+  {
+   "file": "cells/soil_munsell_minerals.json",
+   "hidecode": false,
+   "id": "soil_munsell_minerals",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"soil_munsell_minerals\"), :chroma, :value; group = :hue, size = 11)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/soybean_cultivars.json",
+   "hidecode": false,
+   "id": "soybean_cultivars",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"soybean_cultivars\"), :cult, :prod)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/strawberry_cross_disease.json",
+   "hidecode": false,
+   "id": "strawberry_cross_disease",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"strawberry_cross_disease\"), :female, :count; group = :category)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/strawberry_yield.json",
+   "hidecode": false,
+   "id": "strawberry_yield",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; fieldmap(load_dataset(\"strawberry_yield\"), :col, :row, :yield; label = :gen)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/timber_genetics.json",
+   "hidecode": false,
+   "id": "timber_genetics",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"timber_genetics\"), :Locality, :Elongation; group = :Year)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/tomato_insecticides.json",
+   "hidecode": false,
+   "id": "tomato_insecticides",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; counts(load_dataset(\"tomato_insecticides\").target_pest; name = \"products\")...)",
+   "tags": []
+  },
+  {
+   "file": "cells/tomato_uniformity.json",
+   "hidecode": false,
+   "id": "tomato_uniformity",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; fieldmap(load_dataset(\"tomato_uniformity\"), :col, :row, :yield)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/toxin_lethal_dose.json",
+   "hidecode": false,
+   "id": "toxin_lethal_dose",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; curve(share(transform(load_dataset(\"toxin_lethal_dose\"), [:dead, :alive] => (+) => :n), :dead, :n),\n               :dose, :proportion)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/turnip_density.json",
+   "hidecode": false,
+   "id": "turnip_density",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; scatter(load_dataset(\"turnip_density\"), :density, :yield; group = :spacing)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/us_state_soils.json",
+   "hidecode": false,
+   "id": "us_state_soils",
+   "kind": "code",
+   "output": true,
+   "source": "load_dataset(\"us_state_soils\")",
+   "tags": []
+  },
+  {
+   "file": "cells/wheat_bunt.json",
+   "hidecode": false,
+   "id": "wheat_bunt",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"wheat_bunt\"), :gen, :pct)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/wheat_splitsplit.json",
+   "hidecode": false,
+   "id": "wheat_splitsplit",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; fieldmap(load_dataset(\"wheat_splitsplit\"), :col, :row, :yield; label = :gen)...)",
+   "tags": []
+  },
+  {
+   "file": "cells/willow_cutting_yield.json",
+   "hidecode": false,
+   "id": "willow_cutting_yield",
+   "kind": "code",
+   "output": true,
+   "source": "echart(; dots(load_dataset(\"willow_cutting_yield\"), :Type, :Yield; group = :Size)...)",
+   "tags": []
+  }
+ ],
+ "frontend": [],
+ "generator": "KaimonSlate 1.9.0",
+ "key": "9587b037d40b4d596444c3a73fd7e3f2617ad5a590b82f279b324d378c8e6234",
+ "libs": [
+  {
+   "css": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js",
+   "name": "echarts"
+  }
+ ],
+ "notebook": {
+  "abstract": "",
+  "byline": "",
+  "file": "gallery.jl",
+  "id": "gallery",
+  "subtitle": "",
+  "title": "Dataset gallery"
+ },
+ "rendered": {
+  "at": "2026-09-27T11:55:12.355Z",
+  "errors": [],
+  "frozen": [],
+  "julia": "1.12.7",
+  "kernel": "worker",
+  "via": "hub"
+ },
+ "replays": {
+  "avocado_us_sale:avocado_kind": {
+   "asset": "data/avocado_kind_replay-4743dfe4.f64.bin",
+   "bytes": 12960,
+   "control": "avocado_kind",
+   "domain": [
+    "Conventional",
+    "Organic"
+   ],
+   "seconds": 0.0002810955047607422,
+   "slice": [
+    405,
+    2
+   ]
+  },
+  "avocado_us_sale:avocado_kind#1": {
+   "asset": "data/avocado_kind_replay-ad3bcfde.f64.bin",
+   "bytes": 12960,
+   "control": "avocado_kind",
+   "domain": [
+    "Conventional",
+    "Organic"
+   ],
+   "seconds": 0.00021600723266601562,
+   "slice": [
+    405,
+    2
+   ]
+  },
+  "coffee_composition:coffee_measure": {
+   "asset": "data/coffee_measure_replay-e1c90d59.f64.bin",
+   "bytes": 5760,
+   "control": "coffee_measure",
+   "domain": [
+    "Caffine",
+    "Trigonelline",
+    "Chlorogenic Acid",
+    "Fat",
+    "Extract Yield",
+    "ph Value",
+    "Water",
+    "Bean Weight",
+    "Mineral Content",
+    "Free Acid"
+   ],
+   "seconds": 1.1200389862060547,
+   "slice": [
+    36,
+    2
+   ]
+  },
+  "coffee_composition:coffee_measure#1": {
+   "asset": "data/coffee_measure_replay-a5422f06.f64.bin",
+   "bytes": 1120,
+   "control": "coffee_measure",
+   "domain": [
+    "Caffine",
+    "Trigonelline",
+    "Chlorogenic Acid",
+    "Fat",
+    "Extract Yield",
+    "ph Value",
+    "Water",
+    "Bean Weight",
+    "Mineral Content",
+    "Free Acid"
+   ],
+   "seconds": 0.0002079010009765625,
+   "slice": [
+    7,
+    2
+   ]
+  },
+  "red_wine_quality:wine_measure": {
+   "asset": "data/wine_measure_replay-25510dde.f64.bin",
+   "bytes": 281424,
+   "control": "wine_measure",
+   "domain": [
+    "alcohol",
+    "volatile_acidity",
+    "sulphates",
+    "citric_acid",
+    "fixed_acidity",
+    "residual_sugar",
+    "chlorides",
+    "free_sulfur_dioxide",
+    "total_sulfur_dioxide",
+    "density",
+    "pH"
+   ],
+   "seconds": 0.0007970333099365234,
+   "slice": [
+    1599,
+    2
+   ]
+  },
+  "red_wine_quality:wine_measure#1": {
+   "asset": "data/wine_measure_replay-c54d3321.f64.bin",
+   "bytes": 1056,
+   "control": "wine_measure",
+   "domain": [
+    "alcohol",
+    "volatile_acidity",
+    "sulphates",
+    "citric_acid",
+    "fixed_acidity",
+    "residual_sugar",
+    "chlorides",
+    "free_sulfur_dioxide",
+    "total_sulfur_dioxide",
+    "density",
+    "pH"
+   ],
+   "seconds": 0.009788990020751953,
+   "slice": [
+    6,
+    2
+   ]
+  },
+  "rice_wheat_production:rice_measure": {
+   "asset": "data/rice_measure_replay-5a58e98a.f64.bin",
+   "bytes": 1272,
+   "control": "rice_measure",
+   "domain": [
+    "Production",
+    "Area",
+    "Yield"
+   ],
+   "seconds": 0.4651031494140625,
+   "slice": [
+    53
+   ]
+  },
+  "rice_wheat_production:rice_measure#1": {
+   "asset": "data/rice_measure_replay-1a7f8e7c.f64.bin",
+   "bytes": 1272,
+   "control": "rice_measure",
+   "domain": [
+    "Production",
+    "Area",
+    "Yield"
+   ],
+   "seconds": 0.0001900196075439453,
+   "slice": [
+    53
+   ]
+  }
+ },
+ "runtime": "runtime/slate-embed.js",
+ "schema": 1,
+ "theme": {
+  "dark": {
+   "palette": "midnight",
+   "vars": "--bg:#0d1120;--bg2:#141828;--bg3:#1a1e2e;--border:#2a2e40;--text:#d4d8e8;--dim:#6a7090;--accent:#569cd6;--green:#56d364;--red:#e57575;--gold:#ffd700;--orange:#ce9178;--purple:#c586c0;--teal:#4ec9b0;--titlefg:#ffffff;--hl-com:#6a9955;--hl-fn:#dcdcaa;--hl-kw:#c586c0;--hl-macro:#569cd6;--hl-num:#b5cea8;--hl-op:#56b6c2;--hl-str:#ce9178;--hl-sym:#d19a66;--hl-type:#4ec9b0;"
+  },
+  "light": {
+   "palette": "daylight",
+   "vars": "--bg:#ffffff;--bg2:#f5f7fa;--bg3:#eaeef3;--border:#d5dbe3;--text:#222730;--dim:#6b7480;--accent:#0969da;--green:#1a7f37;--red:#cf222e;--gold:#9a6700;--orange:#bc4c00;--purple:#8250df;--teal:#0a7b83;--titlefg:#222730;--hl-com:#008000;--hl-fn:#795e26;--hl-kw:#af00db;--hl-macro:#0000ff;--hl-num:#098658;--hl-op:#0451a5;--hl-str:#a31515;--hl-sym:#b26900;--hl-type:#267f99;"
+  }
+ }
+}

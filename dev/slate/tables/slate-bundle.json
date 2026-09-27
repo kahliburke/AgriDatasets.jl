@@ -1,0 +1,1353 @@
+{
+ "assets": {},
+ "cells": [
+  {
+   "file": "cells/intro.json",
+   "id": "intro",
+   "kind": "markdown",
+   "markdown": "# Dataset tables\n\nFor every dataset in AgriDatasets, a summary of its columns and the data itself. The dataset pages of\nthe documentation show them.",
+   "native": true,
+   "output": true,
+   "tags": []
+  },
+  {
+   "file": "cells/setup.json",
+   "hidecode": false,
+   "id": "setup",
+   "kind": "code",
+   "output": true,
+   "source": "using AgriDatasets, DataFrames, AgriViz\n\n# The column summary as a table: one row per column. The share missing is drawn as a bar against\n# 0–100%, so a column missing a few values shows a short bar, not a full one.\ncolumns_table(name) = slate_table(column_summary(load_dataset(name)); align = (summary = :left,),\n                                  format = (missing = :percent,), viz = (missing = (kind = :bar, domain = (0, 1)),))\n\n# The first rows of a dataset; the page says how many there are in all.\nconst PREVIEW = 25\npreview(name) = first(load_dataset(name), PREVIEW)",
+   "tags": [
+    "import_scaffold"
+   ]
+  },
+  {
+   "file": "cells/alfalfa_soil_columns.json",
+   "hidecode": false,
+   "id": "alfalfa_soil_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"alfalfa_soil\")",
+   "tags": []
+  },
+  {
+   "file": "cells/alfalfa_soil_data.json",
+   "hidecode": false,
+   "id": "alfalfa_soil_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"alfalfa_soil\")",
+   "tags": []
+  },
+  {
+   "file": "cells/apple_canker_columns.json",
+   "hidecode": false,
+   "id": "apple_canker_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"apple_canker\")",
+   "tags": []
+  },
+  {
+   "file": "cells/apple_canker_data.json",
+   "hidecode": false,
+   "id": "apple_canker_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"apple_canker\")",
+   "tags": []
+  },
+  {
+   "file": "cells/apple_uniformity_columns.json",
+   "hidecode": false,
+   "id": "apple_uniformity_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"apple_uniformity\")",
+   "tags": []
+  },
+  {
+   "file": "cells/apple_uniformity_data.json",
+   "hidecode": false,
+   "id": "apple_uniformity_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"apple_uniformity\")",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_soil_columns.json",
+   "hidecode": false,
+   "id": "arabica_soil_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"arabica_soil\")",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_soil_data.json",
+   "hidecode": false,
+   "id": "arabica_soil_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"arabica_soil\")",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_temp_columns.json",
+   "hidecode": false,
+   "id": "arabica_temp_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"arabica_temp\")",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_temp_data.json",
+   "hidecode": false,
+   "id": "arabica_temp_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"arabica_temp\")",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_terrain_columns.json",
+   "hidecode": false,
+   "id": "arabica_terrain_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"arabica_terrain\")",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_terrain_data.json",
+   "hidecode": false,
+   "id": "arabica_terrain_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"arabica_terrain\")",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_water_columns.json",
+   "hidecode": false,
+   "id": "arabica_water_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"arabica_water\")",
+   "tags": []
+  },
+  {
+   "file": "cells/arabica_water_data.json",
+   "hidecode": false,
+   "id": "arabica_water_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"arabica_water\")",
+   "tags": []
+  },
+  {
+   "file": "cells/avocado_us_sale_columns.json",
+   "hidecode": false,
+   "id": "avocado_us_sale_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"avocado_us_sale\")",
+   "tags": []
+  },
+  {
+   "file": "cells/avocado_us_sale_data.json",
+   "hidecode": false,
+   "id": "avocado_us_sale_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"avocado_us_sale\")",
+   "tags": []
+  },
+  {
+   "file": "cells/bamboo_growth_columns.json",
+   "hidecode": false,
+   "id": "bamboo_growth_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"bamboo_growth\")",
+   "tags": []
+  },
+  {
+   "file": "cells/bamboo_growth_data.json",
+   "hidecode": false,
+   "id": "bamboo_growth_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"bamboo_growth\")",
+   "tags": []
+  },
+  {
+   "file": "cells/biological_control_columns.json",
+   "hidecode": false,
+   "id": "biological_control_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"biological_control\")",
+   "tags": []
+  },
+  {
+   "file": "cells/biological_control_data.json",
+   "hidecode": false,
+   "id": "biological_control_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"biological_control\")",
+   "tags": []
+  },
+  {
+   "file": "cells/bird_grazing_columns.json",
+   "hidecode": false,
+   "id": "bird_grazing_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"bird_grazing\")",
+   "tags": []
+  },
+  {
+   "file": "cells/bird_grazing_data.json",
+   "hidecode": false,
+   "id": "bird_grazing_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"bird_grazing\")",
+   "tags": []
+  },
+  {
+   "file": "cells/black_duck_survival_columns.json",
+   "hidecode": false,
+   "id": "black_duck_survival_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"black_duck_survival\")",
+   "tags": []
+  },
+  {
+   "file": "cells/black_duck_survival_data.json",
+   "hidecode": false,
+   "id": "black_duck_survival_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"black_duck_survival\")",
+   "tags": []
+  },
+  {
+   "file": "cells/blackgrass_herbicide_columns.json",
+   "hidecode": false,
+   "id": "blackgrass_herbicide_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"blackgrass_herbicide\")",
+   "tags": []
+  },
+  {
+   "file": "cells/blackgrass_herbicide_data.json",
+   "hidecode": false,
+   "id": "blackgrass_herbicide_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"blackgrass_herbicide\")",
+   "tags": []
+  },
+  {
+   "file": "cells/broiler_growth_columns.json",
+   "hidecode": false,
+   "id": "broiler_growth_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"broiler_growth\")",
+   "tags": []
+  },
+  {
+   "file": "cells/broiler_growth_data.json",
+   "hidecode": false,
+   "id": "broiler_growth_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"broiler_growth\")",
+   "tags": []
+  },
+  {
+   "file": "cells/budworm_pyrethroid_columns.json",
+   "hidecode": false,
+   "id": "budworm_pyrethroid_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"budworm_pyrethroid\")",
+   "tags": []
+  },
+  {
+   "file": "cells/budworm_pyrethroid_data.json",
+   "hidecode": false,
+   "id": "budworm_pyrethroid_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"budworm_pyrethroid\")",
+   "tags": []
+  },
+  {
+   "file": "cells/carrot_fly_infestation_columns.json",
+   "hidecode": false,
+   "id": "carrot_fly_infestation_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"carrot_fly_infestation\")",
+   "tags": []
+  },
+  {
+   "file": "cells/carrot_fly_infestation_data.json",
+   "hidecode": false,
+   "id": "carrot_fly_infestation_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"carrot_fly_infestation\")",
+   "tags": []
+  },
+  {
+   "file": "cells/carrot_insecticide_columns.json",
+   "hidecode": false,
+   "id": "carrot_insecticide_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"carrot_insecticide\")",
+   "tags": []
+  },
+  {
+   "file": "cells/carrot_insecticide_data.json",
+   "hidecode": false,
+   "id": "carrot_insecticide_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"carrot_insecticide\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cattle_butterfat_columns.json",
+   "hidecode": false,
+   "id": "cattle_butterfat_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"cattle_butterfat\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cattle_butterfat_data.json",
+   "hidecode": false,
+   "id": "cattle_butterfat_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"cattle_butterfat\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cauliflower_growth_columns.json",
+   "hidecode": false,
+   "id": "cauliflower_growth_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"cauliflower_growth\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cauliflower_growth_data.json",
+   "hidecode": false,
+   "id": "cauliflower_growth_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"cauliflower_growth\")",
+   "tags": []
+  },
+  {
+   "file": "cells/coffee_composition_columns.json",
+   "hidecode": false,
+   "id": "coffee_composition_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"coffee_composition\")",
+   "tags": []
+  },
+  {
+   "file": "cells/coffee_composition_data.json",
+   "hidecode": false,
+   "id": "coffee_composition_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"coffee_composition\")",
+   "tags": []
+  },
+  {
+   "file": "cells/coffee_production_columns.json",
+   "hidecode": false,
+   "id": "coffee_production_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"coffee_production\")",
+   "tags": []
+  },
+  {
+   "file": "cells/coffee_production_data.json",
+   "hidecode": false,
+   "id": "coffee_production_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"coffee_production\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cork_tree_direction_columns.json",
+   "hidecode": false,
+   "id": "cork_tree_direction_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"cork_tree_direction\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cork_tree_direction_data.json",
+   "hidecode": false,
+   "id": "cork_tree_direction_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"cork_tree_direction\")",
+   "tags": []
+  },
+  {
+   "file": "cells/corn_hybrid_density_columns.json",
+   "hidecode": false,
+   "id": "corn_hybrid_density_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"corn_hybrid_density\")",
+   "tags": []
+  },
+  {
+   "file": "cells/corn_hybrid_density_data.json",
+   "hidecode": false,
+   "id": "corn_hybrid_density_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"corn_hybrid_density\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cotton_pesticide_columns.json",
+   "hidecode": false,
+   "id": "cotton_pesticide_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"cotton_pesticide\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cotton_pesticide_data.json",
+   "hidecode": false,
+   "id": "cotton_pesticide_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"cotton_pesticide\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cowpea_maize_yield_columns.json",
+   "hidecode": false,
+   "id": "cowpea_maize_yield_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"cowpea_maize_yield\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cowpea_maize_yield_data.json",
+   "hidecode": false,
+   "id": "cowpea_maize_yield_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"cowpea_maize_yield\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cows_insemination_columns.json",
+   "hidecode": false,
+   "id": "cows_insemination_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"cows_insemination\")",
+   "tags": []
+  },
+  {
+   "file": "cells/cows_insemination_data.json",
+   "hidecode": false,
+   "id": "cows_insemination_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"cows_insemination\")",
+   "tags": []
+  },
+  {
+   "file": "cells/earthworm_crop_soils_columns.json",
+   "hidecode": false,
+   "id": "earthworm_crop_soils_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"earthworm_crop_soils\")",
+   "tags": []
+  },
+  {
+   "file": "cells/earthworm_crop_soils_data.json",
+   "hidecode": false,
+   "id": "earthworm_crop_soils_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"earthworm_crop_soils\")",
+   "tags": []
+  },
+  {
+   "file": "cells/earthworm_population_columns.json",
+   "hidecode": false,
+   "id": "earthworm_population_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"earthworm_population\")",
+   "tags": []
+  },
+  {
+   "file": "cells/earthworm_population_data.json",
+   "hidecode": false,
+   "id": "earthworm_population_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"earthworm_population\")",
+   "tags": []
+  },
+  {
+   "file": "cells/eelworm_fumigation_columns.json",
+   "hidecode": false,
+   "id": "eelworm_fumigation_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"eelworm_fumigation\")",
+   "tags": []
+  },
+  {
+   "file": "cells/eelworm_fumigation_data.json",
+   "hidecode": false,
+   "id": "eelworm_fumigation_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"eelworm_fumigation\")",
+   "tags": []
+  },
+  {
+   "file": "cells/egg_weight_daily_columns.json",
+   "hidecode": false,
+   "id": "egg_weight_daily_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"egg_weight_daily\")",
+   "tags": []
+  },
+  {
+   "file": "cells/egg_weight_daily_data.json",
+   "hidecode": false,
+   "id": "egg_weight_daily_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"egg_weight_daily\")",
+   "tags": []
+  },
+  {
+   "file": "cells/eucalyptus_progenies_columns.json",
+   "hidecode": false,
+   "id": "eucalyptus_progenies_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"eucalyptus_progenies\")",
+   "tags": []
+  },
+  {
+   "file": "cells/eucalyptus_progenies_data.json",
+   "hidecode": false,
+   "id": "eucalyptus_progenies_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"eucalyptus_progenies\")",
+   "tags": []
+  },
+  {
+   "file": "cells/fish_feeding_columns.json",
+   "hidecode": false,
+   "id": "fish_feeding_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"fish_feeding\")",
+   "tags": []
+  },
+  {
+   "file": "cells/fish_feeding_data.json",
+   "hidecode": false,
+   "id": "fish_feeding_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"fish_feeding\")",
+   "tags": []
+  },
+  {
+   "file": "cells/fungicide_latin_square_columns.json",
+   "hidecode": false,
+   "id": "fungicide_latin_square_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"fungicide_latin_square\")",
+   "tags": []
+  },
+  {
+   "file": "cells/fungicide_latin_square_data.json",
+   "hidecode": false,
+   "id": "fungicide_latin_square_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"fungicide_latin_square\")",
+   "tags": []
+  },
+  {
+   "file": "cells/grape_uniformity_columns.json",
+   "hidecode": false,
+   "id": "grape_uniformity_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"grape_uniformity\")",
+   "tags": []
+  },
+  {
+   "file": "cells/grape_uniformity_data.json",
+   "hidecode": false,
+   "id": "grape_uniformity_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"grape_uniformity\")",
+   "tags": []
+  },
+  {
+   "file": "cells/guinea_pig_sleep_columns.json",
+   "hidecode": false,
+   "id": "guinea_pig_sleep_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"guinea_pig_sleep\")",
+   "tags": []
+  },
+  {
+   "file": "cells/guinea_pig_sleep_data.json",
+   "hidecode": false,
+   "id": "guinea_pig_sleep_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"guinea_pig_sleep\")",
+   "tags": []
+  },
+  {
+   "file": "cells/hawaii_plant_size_columns.json",
+   "hidecode": false,
+   "id": "hawaii_plant_size_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"hawaii_plant_size\")",
+   "tags": []
+  },
+  {
+   "file": "cells/hawaii_plant_size_data.json",
+   "hidecode": false,
+   "id": "hawaii_plant_size_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"hawaii_plant_size\")",
+   "tags": []
+  },
+  {
+   "file": "cells/hawaii_tree_growth_columns.json",
+   "hidecode": false,
+   "id": "hawaii_tree_growth_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"hawaii_tree_growth\")",
+   "tags": []
+  },
+  {
+   "file": "cells/hawaii_tree_growth_data.json",
+   "hidecode": false,
+   "id": "hawaii_tree_growth_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"hawaii_tree_growth\")",
+   "tags": []
+  },
+  {
+   "file": "cells/idn_rice_farms_columns.json",
+   "hidecode": false,
+   "id": "idn_rice_farms_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"idn_rice_farms\")",
+   "tags": []
+  },
+  {
+   "file": "cells/idn_rice_farms_data.json",
+   "hidecode": false,
+   "id": "idn_rice_farms_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"idn_rice_farms\")",
+   "tags": []
+  },
+  {
+   "file": "cells/kiwi_crop_design_columns.json",
+   "hidecode": false,
+   "id": "kiwi_crop_design_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"kiwi_crop_design\")",
+   "tags": []
+  },
+  {
+   "file": "cells/kiwi_crop_design_data.json",
+   "hidecode": false,
+   "id": "kiwi_crop_design_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"kiwi_crop_design\")",
+   "tags": []
+  },
+  {
+   "file": "cells/lady_bird_fungus_columns.json",
+   "hidecode": false,
+   "id": "lady_bird_fungus_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"lady_bird_fungus\")",
+   "tags": []
+  },
+  {
+   "file": "cells/lady_bird_fungus_data.json",
+   "hidecode": false,
+   "id": "lady_bird_fungus_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"lady_bird_fungus\")",
+   "tags": []
+  },
+  {
+   "file": "cells/lamb_births_columns.json",
+   "hidecode": false,
+   "id": "lamb_births_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"lamb_births\")",
+   "tags": []
+  },
+  {
+   "file": "cells/lamb_births_data.json",
+   "hidecode": false,
+   "id": "lamb_births_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"lamb_births\")",
+   "tags": []
+  },
+  {
+   "file": "cells/nitrofen_toxicity_columns.json",
+   "hidecode": false,
+   "id": "nitrofen_toxicity_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"nitrofen_toxicity\")",
+   "tags": []
+  },
+  {
+   "file": "cells/nitrofen_toxicity_data.json",
+   "hidecode": false,
+   "id": "nitrofen_toxicity_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"nitrofen_toxicity\")",
+   "tags": []
+  },
+  {
+   "file": "cells/orange_rootstocks_columns.json",
+   "hidecode": false,
+   "id": "orange_rootstocks_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"orange_rootstocks\")",
+   "tags": []
+  },
+  {
+   "file": "cells/orange_rootstocks_data.json",
+   "hidecode": false,
+   "id": "orange_rootstocks_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"orange_rootstocks\")",
+   "tags": []
+  },
+  {
+   "file": "cells/peach_uniformity_columns.json",
+   "hidecode": false,
+   "id": "peach_uniformity_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"peach_uniformity\")",
+   "tags": []
+  },
+  {
+   "file": "cells/peach_uniformity_data.json",
+   "hidecode": false,
+   "id": "peach_uniformity_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"peach_uniformity\")",
+   "tags": []
+  },
+  {
+   "file": "cells/pig_weight_gain_columns.json",
+   "hidecode": false,
+   "id": "pig_weight_gain_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"pig_weight_gain\")",
+   "tags": []
+  },
+  {
+   "file": "cells/pig_weight_gain_data.json",
+   "hidecode": false,
+   "id": "pig_weight_gain_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"pig_weight_gain\")",
+   "tags": []
+  },
+  {
+   "file": "cells/plant_growth_regulator_columns.json",
+   "hidecode": false,
+   "id": "plant_growth_regulator_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"plant_growth_regulator\")",
+   "tags": []
+  },
+  {
+   "file": "cells/plant_growth_regulator_data.json",
+   "hidecode": false,
+   "id": "plant_growth_regulator_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"plant_growth_regulator\")",
+   "tags": []
+  },
+  {
+   "file": "cells/pollen_removal_columns.json",
+   "hidecode": false,
+   "id": "pollen_removal_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"pollen_removal\")",
+   "tags": []
+  },
+  {
+   "file": "cells/pollen_removal_data.json",
+   "hidecode": false,
+   "id": "pollen_removal_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"pollen_removal\")",
+   "tags": []
+  },
+  {
+   "file": "cells/potato_scab_sulfur_columns.json",
+   "hidecode": false,
+   "id": "potato_scab_sulfur_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"potato_scab_sulfur\")",
+   "tags": []
+  },
+  {
+   "file": "cells/potato_scab_sulfur_data.json",
+   "hidecode": false,
+   "id": "potato_scab_sulfur_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"potato_scab_sulfur\")",
+   "tags": []
+  },
+  {
+   "file": "cells/rabbit_body_mass_columns.json",
+   "hidecode": false,
+   "id": "rabbit_body_mass_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"rabbit_body_mass\")",
+   "tags": []
+  },
+  {
+   "file": "cells/rabbit_body_mass_data.json",
+   "hidecode": false,
+   "id": "rabbit_body_mass_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"rabbit_body_mass\")",
+   "tags": []
+  },
+  {
+   "file": "cells/red_wine_quality_columns.json",
+   "hidecode": false,
+   "id": "red_wine_quality_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"red_wine_quality\")",
+   "tags": []
+  },
+  {
+   "file": "cells/red_wine_quality_data.json",
+   "hidecode": false,
+   "id": "red_wine_quality_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"red_wine_quality\")",
+   "tags": []
+  },
+  {
+   "file": "cells/rice_wheat_production_columns.json",
+   "hidecode": false,
+   "id": "rice_wheat_production_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"rice_wheat_production\")",
+   "tags": []
+  },
+  {
+   "file": "cells/rice_wheat_production_data.json",
+   "hidecode": false,
+   "id": "rice_wheat_production_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"rice_wheat_production\")",
+   "tags": []
+  },
+  {
+   "file": "cells/river_deforestation_columns.json",
+   "hidecode": false,
+   "id": "river_deforestation_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"river_deforestation\")",
+   "tags": []
+  },
+  {
+   "file": "cells/river_deforestation_data.json",
+   "hidecode": false,
+   "id": "river_deforestation_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"river_deforestation\")",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_soil_columns.json",
+   "hidecode": false,
+   "id": "robusta_soil_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"robusta_soil\")",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_soil_data.json",
+   "hidecode": false,
+   "id": "robusta_soil_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"robusta_soil\")",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_temp_columns.json",
+   "hidecode": false,
+   "id": "robusta_temp_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"robusta_temp\")",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_temp_data.json",
+   "hidecode": false,
+   "id": "robusta_temp_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"robusta_temp\")",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_terrain_columns.json",
+   "hidecode": false,
+   "id": "robusta_terrain_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"robusta_terrain\")",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_terrain_data.json",
+   "hidecode": false,
+   "id": "robusta_terrain_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"robusta_terrain\")",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_water_columns.json",
+   "hidecode": false,
+   "id": "robusta_water_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"robusta_water\")",
+   "tags": []
+  },
+  {
+   "file": "cells/robusta_water_data.json",
+   "hidecode": false,
+   "id": "robusta_water_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"robusta_water\")",
+   "tags": []
+  },
+  {
+   "file": "cells/seed_germination_columns.json",
+   "hidecode": false,
+   "id": "seed_germination_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"seed_germination\")",
+   "tags": []
+  },
+  {
+   "file": "cells/seed_germination_data.json",
+   "hidecode": false,
+   "id": "seed_germination_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"seed_germination\")",
+   "tags": []
+  },
+  {
+   "file": "cells/soil_munsell_colors_columns.json",
+   "hidecode": false,
+   "id": "soil_munsell_colors_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"soil_munsell_colors\")",
+   "tags": []
+  },
+  {
+   "file": "cells/soil_munsell_colors_data.json",
+   "hidecode": false,
+   "id": "soil_munsell_colors_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"soil_munsell_colors\")",
+   "tags": []
+  },
+  {
+   "file": "cells/soil_munsell_minerals_columns.json",
+   "hidecode": false,
+   "id": "soil_munsell_minerals_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"soil_munsell_minerals\")",
+   "tags": []
+  },
+  {
+   "file": "cells/soil_munsell_minerals_data.json",
+   "hidecode": false,
+   "id": "soil_munsell_minerals_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"soil_munsell_minerals\")",
+   "tags": []
+  },
+  {
+   "file": "cells/soybean_cultivars_columns.json",
+   "hidecode": false,
+   "id": "soybean_cultivars_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"soybean_cultivars\")",
+   "tags": []
+  },
+  {
+   "file": "cells/soybean_cultivars_data.json",
+   "hidecode": false,
+   "id": "soybean_cultivars_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"soybean_cultivars\")",
+   "tags": []
+  },
+  {
+   "file": "cells/strawberry_cross_disease_columns.json",
+   "hidecode": false,
+   "id": "strawberry_cross_disease_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"strawberry_cross_disease\")",
+   "tags": []
+  },
+  {
+   "file": "cells/strawberry_cross_disease_data.json",
+   "hidecode": false,
+   "id": "strawberry_cross_disease_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"strawberry_cross_disease\")",
+   "tags": []
+  },
+  {
+   "file": "cells/strawberry_yield_columns.json",
+   "hidecode": false,
+   "id": "strawberry_yield_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"strawberry_yield\")",
+   "tags": []
+  },
+  {
+   "file": "cells/strawberry_yield_data.json",
+   "hidecode": false,
+   "id": "strawberry_yield_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"strawberry_yield\")",
+   "tags": []
+  },
+  {
+   "file": "cells/timber_genetics_columns.json",
+   "hidecode": false,
+   "id": "timber_genetics_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"timber_genetics\")",
+   "tags": []
+  },
+  {
+   "file": "cells/timber_genetics_data.json",
+   "hidecode": false,
+   "id": "timber_genetics_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"timber_genetics\")",
+   "tags": []
+  },
+  {
+   "file": "cells/tomato_insecticides_columns.json",
+   "hidecode": false,
+   "id": "tomato_insecticides_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"tomato_insecticides\")",
+   "tags": []
+  },
+  {
+   "file": "cells/tomato_insecticides_data.json",
+   "hidecode": false,
+   "id": "tomato_insecticides_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"tomato_insecticides\")",
+   "tags": []
+  },
+  {
+   "file": "cells/tomato_uniformity_columns.json",
+   "hidecode": false,
+   "id": "tomato_uniformity_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"tomato_uniformity\")",
+   "tags": []
+  },
+  {
+   "file": "cells/tomato_uniformity_data.json",
+   "hidecode": false,
+   "id": "tomato_uniformity_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"tomato_uniformity\")",
+   "tags": []
+  },
+  {
+   "file": "cells/toxin_lethal_dose_columns.json",
+   "hidecode": false,
+   "id": "toxin_lethal_dose_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"toxin_lethal_dose\")",
+   "tags": []
+  },
+  {
+   "file": "cells/toxin_lethal_dose_data.json",
+   "hidecode": false,
+   "id": "toxin_lethal_dose_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"toxin_lethal_dose\")",
+   "tags": []
+  },
+  {
+   "file": "cells/turnip_density_columns.json",
+   "hidecode": false,
+   "id": "turnip_density_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"turnip_density\")",
+   "tags": []
+  },
+  {
+   "file": "cells/turnip_density_data.json",
+   "hidecode": false,
+   "id": "turnip_density_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"turnip_density\")",
+   "tags": []
+  },
+  {
+   "file": "cells/us_state_soils_columns.json",
+   "hidecode": false,
+   "id": "us_state_soils_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"us_state_soils\")",
+   "tags": []
+  },
+  {
+   "file": "cells/us_state_soils_data.json",
+   "hidecode": false,
+   "id": "us_state_soils_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"us_state_soils\")",
+   "tags": []
+  },
+  {
+   "file": "cells/wheat_bunt_columns.json",
+   "hidecode": false,
+   "id": "wheat_bunt_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"wheat_bunt\")",
+   "tags": []
+  },
+  {
+   "file": "cells/wheat_bunt_data.json",
+   "hidecode": false,
+   "id": "wheat_bunt_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"wheat_bunt\")",
+   "tags": []
+  },
+  {
+   "file": "cells/wheat_splitsplit_columns.json",
+   "hidecode": false,
+   "id": "wheat_splitsplit_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"wheat_splitsplit\")",
+   "tags": []
+  },
+  {
+   "file": "cells/wheat_splitsplit_data.json",
+   "hidecode": false,
+   "id": "wheat_splitsplit_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"wheat_splitsplit\")",
+   "tags": []
+  },
+  {
+   "file": "cells/willow_cutting_yield_columns.json",
+   "hidecode": false,
+   "id": "willow_cutting_yield_columns",
+   "kind": "code",
+   "output": true,
+   "source": "columns_table(\"willow_cutting_yield\")",
+   "tags": []
+  },
+  {
+   "file": "cells/willow_cutting_yield_data.json",
+   "hidecode": false,
+   "id": "willow_cutting_yield_data",
+   "kind": "code",
+   "output": true,
+   "source": "preview(\"willow_cutting_yield\")",
+   "tags": []
+  }
+ ],
+ "frontend": [],
+ "generator": "KaimonSlate 1.9.0",
+ "key": "20b54b99dafcefaba9871fc368138b003819acd2bff053ca18a10e9225f9d2f0",
+ "libs": [
+  {
+   "css": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js",
+   "name": "echarts"
+  }
+ ],
+ "notebook": {
+  "abstract": "",
+  "byline": "",
+  "file": "tables.jl",
+  "id": "tables",
+  "subtitle": "",
+  "title": "Dataset tables"
+ },
+ "rendered": {
+  "at": "2026-09-27T11:56:42.507Z",
+  "errors": [],
+  "frozen": [],
+  "julia": "1.12.7",
+  "kernel": "worker",
+  "via": "hub"
+ },
+ "replays": {},
+ "runtime": "runtime/slate-embed.js",
+ "schema": 1,
+ "theme": {
+  "dark": {
+   "palette": "midnight",
+   "vars": "--bg:#0d1120;--bg2:#141828;--bg3:#1a1e2e;--border:#2a2e40;--text:#d4d8e8;--dim:#6a7090;--accent:#569cd6;--green:#56d364;--red:#e57575;--gold:#ffd700;--orange:#ce9178;--purple:#c586c0;--teal:#4ec9b0;--titlefg:#ffffff;--hl-com:#6a9955;--hl-fn:#dcdcaa;--hl-kw:#c586c0;--hl-macro:#569cd6;--hl-num:#b5cea8;--hl-op:#56b6c2;--hl-str:#ce9178;--hl-sym:#d19a66;--hl-type:#4ec9b0;"
+  },
+  "light": {
+   "palette": "daylight",
+   "vars": "--bg:#ffffff;--bg2:#f5f7fa;--bg3:#eaeef3;--border:#d5dbe3;--text:#222730;--dim:#6b7480;--accent:#0969da;--green:#1a7f37;--red:#cf222e;--gold:#9a6700;--orange:#bc4c00;--purple:#8250df;--teal:#0a7b83;--titlefg:#222730;--hl-com:#008000;--hl-fn:#795e26;--hl-kw:#af00db;--hl-macro:#0000ff;--hl-num:#098658;--hl-op:#0451a5;--hl-str:#a31515;--hl-sym:#b26900;--hl-type:#267f99;"
+  }
+ }
+}

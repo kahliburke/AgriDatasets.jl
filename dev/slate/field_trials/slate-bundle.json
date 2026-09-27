@@ -1,0 +1,378 @@
+{
+ "assets": {
+  "data/plotsize_replay-04b584e1.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "plotsize_replay",
+   "order": "col",
+   "path": "data/plotsize_replay-04b584e1.f64.bin",
+   "shape": [
+    1,
+    2,
+    4
+   ],
+   "url": "data/plotsize_replay-04b584e1.f64.bin"
+  },
+  "data/plotsize_replay-15c4f15d.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "plotsize_replay",
+   "order": "col",
+   "path": "data/plotsize_replay-15c4f15d.f64.bin",
+   "shape": [
+    1,
+    2,
+    4
+   ],
+   "url": "data/plotsize_replay-15c4f15d.f64.bin"
+  },
+  "data/plotsize_replay-1dae7fe6.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "plotsize_replay",
+   "order": "col",
+   "path": "data/plotsize_replay-1dae7fe6.f64.bin",
+   "shape": [
+    1,
+    2,
+    4
+   ],
+   "url": "data/plotsize_replay-1dae7fe6.f64.bin"
+  },
+  "data/plotsize_replay-314aee80.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "plotsize_replay",
+   "order": "col",
+   "path": "data/plotsize_replay-314aee80.f64.bin",
+   "shape": [
+    144,
+    3,
+    4
+   ],
+   "url": "data/plotsize_replay-314aee80.f64.bin"
+  },
+  "data/plotsize_replay-378b0896.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "plotsize_replay",
+   "order": "col",
+   "path": "data/plotsize_replay-378b0896.f64.bin",
+   "shape": [
+    198,
+    3,
+    4
+   ],
+   "url": "data/plotsize_replay-378b0896.f64.bin"
+  },
+  "data/plotsize_replay-6b10f0da.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "plotsize_replay",
+   "order": "col",
+   "path": "data/plotsize_replay-6b10f0da.f64.bin",
+   "shape": [
+    180,
+    3,
+    4
+   ],
+   "url": "data/plotsize_replay-6b10f0da.f64.bin"
+  },
+  "data/plotsize_replay-82346b18.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "plotsize_replay",
+   "order": "col",
+   "path": "data/plotsize_replay-82346b18.f64.bin",
+   "shape": [
+    1,
+    2,
+    4
+   ],
+   "url": "data/plotsize_replay-82346b18.f64.bin"
+  },
+  "data/plotsize_replay-d880522e.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "plotsize_replay",
+   "order": "col",
+   "path": "data/plotsize_replay-d880522e.f64.bin",
+   "shape": [
+    155,
+    3,
+    4
+   ],
+   "url": "data/plotsize_replay-d880522e.f64.bin"
+  }
+ },
+ "cells": [
+  {
+   "file": "cells/intro.json",
+   "id": "intro",
+   "kind": "markdown",
+   "markdown": "# Field trials\n\nNo two plots in a field yield the same, even when they are sown with the same seed and treated the\nsame way. Soil, water and slope vary across the ground, and an experiment has to be laid out with\nthat variation in mind. A **uniformity trial** measures it directly: the whole field is grown as one\ncrop, harvested in a grid of small plots, and each plot's yield recorded.\n\nThis notebook maps four such trials from AgriDatasets: grape, peach, tomato and apple. Each plot is\ncoloured by how far its yield sits above or below the field's mean. Merging neighbouring plots into\nlarger ones averages the patchiness out, and the slider below shows how quickly.",
+   "native": true,
+   "output": true,
+   "tags": []
+  },
+  {
+   "file": "cells/setup.json",
+   "hidecode": false,
+   "id": "setup",
+   "kind": "code",
+   "output": true,
+   "source": "using AgriDatasets, DataFrames, Statistics, AgriViz\n\ntrials = [\"grape_uniformity\" => \"Grape\", \"peach_uniformity\" => \"Peach\",\n          \"tomato_uniformity\" => \"Tomato\", \"apple_uniformity\" => \"Apple\"]\n\n# A trial as a matrix of yields, one entry per plot: `row` down the field, `col` across it. A plot\n# with no recorded yield is NaN, and is left out of every average below.\nfunction yield_grid(df)\n    z = fill(NaN, maximum(df.row), maximum(df.col))\n    for r in eachrow(df)\n        z[r.row, r.col] = coalesce(r.yield, NaN)\n    end\n    return z\nend\n\nfields = Dict(label => yield_grid(load_dataset(name)) for (name, label) in trials)\n[(field = k, size = size(v), missing = count(isnan, v)) for (k, v) in fields]",
+   "tags": [
+    "import_scaffold"
+   ]
+  },
+  {
+   "file": "cells/merging.json",
+   "hidecode": false,
+   "id": "merging",
+   "kind": "code",
+   "output": true,
+   "source": "nanmean(x) = (v = filter(!isnan, x); isempty(v) ? NaN : mean(v))\n\n# Merge plots into k×k blocks. Every plot takes its block's mean, so the field keeps its shape and a\n# larger plot shows as a patch of one colour.\nfunction merged(z, k)\n    nr, nc = size(z)\n    block(i, n) = ((i - 1) ÷ k * k + 1):min(((i - 1) ÷ k + 1) * k, n)\n    return [isnan(z[i, j]) ? NaN : nanmean(z[block(i, nr), block(j, nc)]) for i in 1:nr, j in 1:nc]\nend\n\n# Each plot's yield as a percentage above or below the field mean.\ndeviation(z, k) = round.(100 .* (merged(z, k) ./ nanmean(z) .- 1); digits = 1)",
+   "tags": []
+  },
+  {
+   "file": "cells/controls.json",
+   "hidecode": true,
+   "id": "controls",
+   "kind": "code",
+   "output": true,
+   "source": "@bind plotsize Slider(1:4; default = 1, label = \"plots merged per side\")",
+   "tags": []
+  },
+  {
+   "file": "cells/maps.json",
+   "hidecode": true,
+   "id": "maps",
+   "kind": "code",
+   "output": true,
+   "source": "# Colour classes: how far a plot's yield sits from its field's mean, in %. Grey is \"about average\".\nbands = [(lt = -30, label = \"< −30%\"), (gte = -30, lt = -15, label = \"−30…−15\"), (gte = -15, lt = -5, label = \"−15…−5\"),\n         (gte = -5, lte = 5, label = \"±5\"), (gt = 5, lte = 15, label = \"5…15\"), (gt = 15, lte = 30, label = \"15…30\"),\n         (gt = 30, label = \"> 30%\")]\n\n# Small multiples on one scale. The tomato field (6 rows × 30) is turned on its side so all four\n# stand upright in a row; every plot is drawn the same size, as a tile with a gap around it. The\n# whole figure fits in 500px, the width of a docs page's content column.\norder = [\"Grape\", \"Peach\", \"Apple\", \"Tomato\"]\nupright(f) = f == \"Tomato\" ? permutedims(fields[f]) : fields[f]\ncells(f, k) = (d = deviation(upright(f), k); [[j - 1, i - 1, d[i, j]] for i in axes(d, 1) for j in axes(d, 2)])\n\npx, gap, left0, top = 12, 40, 12, 64\ndims = [size(upright(f)) for f in order]\nwidths = [c * px for (_, c) in dims]\nheights = [r * px for (r, _) in dims]\nlefts = left0 .+ cumsum([0; (widths .+ gap)[1:end-1]])\nhidden(i, n) = (gridIndex = i - 1, type = :category, data = string.(1:n), show = false)\nplots(f) = (n = count(!isnan, fields[f]); \"$n plots\")\n\nechart(;\n    title = [(text = order[i], subtext = plots(order[i]), left = lefts[i] + widths[i] ÷ 2, top = 12,\n              textAlign = :center, itemGap = 4, textStyle = (fontSize = 13, fontWeight = :normal),\n              subtextStyle = (fontSize = 11,)) for i in 1:4],\n    grid = [(left = lefts[i], top = top, width = widths[i], height = heights[i]) for i in 1:4],\n    xAxis = [hidden(i, dims[i][2]) for i in 1:4],\n    yAxis = [(hidden(i, dims[i][1])..., inverse = true) for i in 1:4],\n    tooltip = (trigger = :item, formatter = \"{a}<br/>{@[2]}% from the field mean\"),\n    visualMap = (type = :piecewise, pieces = bands, dimension = 2, seriesIndex = 0:3,\n                 orient = :horizontal, left = left0, bottom = 4, itemWidth = 12, itemHeight = 12,\n                 itemGap = 8, itemSymbol = :roundRect, textStyle = (fontSize = 11,)),\n    series = [(type = :scatter, name = order[i], xAxisIndex = i - 1, yAxisIndex = i - 1,\n               symbol = :roundRect, symbolSize = px - 2, emphasis = (scale = 1.3,),\n               data = @replay(plotsize, cells(order[i], plotsize))) for i in 1:4],\n    height = top + maximum(heights) + 52,\n    modes(m -> (visualMap = (pieces = [(color = c,) for c in DIVERGING[m]],),))...,\n)",
+   "tags": [
+    "hidecode",
+    "macrocall"
+   ]
+  },
+  {
+   "file": "cells/law_intro.json",
+   "id": "law_intro",
+   "kind": "markdown",
+   "markdown": "## How big should a plot be?\n\nLarger plots average out more of the ground under them, so they differ from each other less. H. Fairfield\nSmith found in 1938 that the variance between plots falls as a power of their size, V(x) = V₁ / xᵇ, where\nx is the plot size in basic plots. The exponent says how the field varies. Near 1, neighbouring plots are\nindependent and merging keeps paying off. Near 0, neighbours rise and fall together, because the variation\ncomes from broad gradients across the field that no plot size can average away.\n\nThe coefficient of variation (CV) below is measured on whole blocks only, and b is fitted to the four\nsizes.",
+   "native": true,
+   "output": true,
+   "tags": []
+  },
+  {
+   "file": "cells/smith.json",
+   "hidecode": false,
+   "id": "smith",
+   "kind": "code",
+   "output": true,
+   "source": "# Variability of the merged plots, as a coefficient of variation (%). Only whole k×k blocks count: a\n# strip left over at an edge would be a smaller plot, measured at the wrong size.\nfunction cv(z, k)\n    nr, nc = size(z)\n    means = [nanmean(z[(i - 1) * k .+ (1:k), (j - 1) * k .+ (1:k)]) for i in 1:nr ÷ k, j in 1:nc ÷ k]\n    m = filter(!isnan, vec(means))\n    return 100 * std(m) / mean(m)\nend\n\n# Smith's law: V(x) = V₁ / xᵇ for plots x times the basic size. On log axes that is a straight line of\n# slope -b, fitted here by least squares.\nsizes = 1:4\nfunction smith(z)\n    x, v = log.(sizes .^ 2), log.([cv(z, k)^2 for k in sizes])\n    b = -sum((x .- mean(x)) .* (v .- mean(v))) / sum((x .- mean(x)) .^ 2)\n    return round(b; digits = 2)\nend\n\n[(field = f, (Symbol(\"CV $k×$k\") => round(cv(fields[f], k); digits = 1) for k in sizes)...,\n  b = smith(fields[f])) for f in order]",
+   "tags": []
+  },
+  {
+   "file": "cells/lawchart.json",
+   "hidecode": true,
+   "id": "lawchart",
+   "kind": "code",
+   "output": true,
+   "source": "# One line per field, CV against plot area on log axes, named at its right end. Grape, apple and\n# tomato finish close together, so their names are spread apart. The dot on each line follows the slider.\nspread = Dict(\"Tomato\" => -8, \"Apple\" => -3, \"Grape\" => 10)\ncv1(f, k) = round(cv(fields[f], k); digits = 1)\nline(f) = (type = :line, name = f, symbol = :circle, symbolSize = 7, lineStyle = (width = 2,),\n           endLabel = (show = true, formatter = \"{a}\", distance = 8, offset = [0, get(spread, f, 0)],\n                       fontSize = 12, textBorderWidth = 0),\n           data = [[k^2, cv1(f, k)] for k in sizes])\nchosen(f) = (type = :scatter, symbolSize = 13, z = 5, tooltip = (show = false,),\n             data = @replay(plotsize, [[plotsize^2, cv1(f, plotsize)]]))\nlogaxis(name, lo, hi) = (type = :log, logBase = 2, min = lo, max = hi, name = name,\n                         nameLocation = :middle, splitLine = (lineStyle = (opacity = 0.35,),))\n\nechart(;\n    grid = (left = 64, right = 72, top = 48, bottom = 56),\n    legend = (data = order, top = 4, icon = :roundRect, itemWidth = 14, itemHeight = 4),\n    xAxis = (logaxis(\"plot size, in basic plots\", 1, 16)..., nameGap = 32),\n    yAxis = (logaxis(\"CV between plots (%)\", 8, 48)..., nameGap = 36),\n    tooltip = (trigger = :item, formatter = \"{a}<br/>{@[0]} plots merged: CV {@[1]}%\"),\n    series = [[line(f) for f in order]; [chosen(f) for f in order]],\n    height = 360,\n    modes(m -> (series = [(itemStyle = (color = c,), lineStyle = (color = c,),\n                           endLabel = (color = INK[m].secondary,))\n                          for c in repeat(CATEGORICAL[m][1:4], 2)],))...,\n)",
+   "tags": [
+    "hidecode",
+    "macrocall"
+   ]
+  },
+  {
+   "file": "cells/reading.json",
+   "id": "reading",
+   "kind": "markdown",
+   "markdown": "With plots of **1 × 1** (1 basic plots each), the CV between\nplots is 43.5% for grape, 31.1% for peach,\n22.7% for apple and 20.8% for tomato.\n\nGrape starts out the most variable and falls fastest (b = 1.02): its plots vary\nalmost independently, so merging them works. Peach (b = 0.38) barely improves\npast four basic plots. Its map shows why, with whole bands of the field above or below average.",
+   "native": true,
+   "output": true,
+   "tags": []
+  }
+ ],
+ "frontend": [],
+ "generator": "KaimonSlate 1.9.0",
+ "key": "4e480a8371f233268ec31fd352ac6d5e1b8b481d87cd4cc346dbe3f6dc7587ed",
+ "libs": [
+  {
+   "css": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js",
+   "name": "echarts"
+  }
+ ],
+ "notebook": {
+  "abstract": "",
+  "byline": "",
+  "file": "field_trials.jl",
+  "id": "field_trials",
+  "subtitle": "",
+  "title": "Field trials"
+ },
+ "rendered": {
+  "at": "2026-09-27T11:54:13.150Z",
+  "errors": [],
+  "frozen": [],
+  "julia": "1.12.7",
+  "kernel": "worker",
+  "via": "hub"
+ },
+ "replays": {
+  "lawchart:plotsize": {
+   "asset": "data/plotsize_replay-15c4f15d.f64.bin",
+   "bytes": 64,
+   "control": "plotsize",
+   "domain": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "seconds": 3.790855407714844e-5,
+   "slice": [
+    1,
+    2
+   ]
+  },
+  "lawchart:plotsize#1": {
+   "asset": "data/plotsize_replay-82346b18.f64.bin",
+   "bytes": 64,
+   "control": "plotsize",
+   "domain": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "seconds": 1.0012879371643066,
+   "slice": [
+    1,
+    2
+   ]
+  },
+  "lawchart:plotsize#2": {
+   "asset": "data/plotsize_replay-04b584e1.f64.bin",
+   "bytes": 64,
+   "control": "plotsize",
+   "domain": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "seconds": 5.698204040527344e-5,
+   "slice": [
+    1,
+    2
+   ]
+  },
+  "lawchart:plotsize#3": {
+   "asset": "data/plotsize_replay-1dae7fe6.f64.bin",
+   "bytes": 64,
+   "control": "plotsize",
+   "domain": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "seconds": 0.00015997886657714844,
+   "slice": [
+    1,
+    2
+   ]
+  },
+  "maps:plotsize": {
+   "asset": "data/plotsize_replay-d880522e.f64.bin",
+   "bytes": 14880,
+   "control": "plotsize",
+   "domain": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "seconds": 9.703636169433594e-5,
+   "slice": [
+    155,
+    3
+   ]
+  },
+  "maps:plotsize#1": {
+   "asset": "data/plotsize_replay-314aee80.f64.bin",
+   "bytes": 13824,
+   "control": "plotsize",
+   "domain": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "seconds": 0.00010991096496582031,
+   "slice": [
+    144,
+    3
+   ]
+  },
+  "maps:plotsize#2": {
+   "asset": "data/plotsize_replay-378b0896.f64.bin",
+   "bytes": 19008,
+   "control": "plotsize",
+   "domain": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "seconds": 0.0002300739288330078,
+   "slice": [
+    198,
+    3
+   ]
+  },
+  "maps:plotsize#3": {
+   "asset": "data/plotsize_replay-6b10f0da.f64.bin",
+   "bytes": 17280,
+   "control": "plotsize",
+   "domain": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "seconds": 0.00011110305786132812,
+   "slice": [
+    180,
+    3
+   ]
+  }
+ },
+ "runtime": "runtime/slate-embed.js",
+ "schema": 1,
+ "theme": {
+  "dark": {
+   "palette": "midnight",
+   "vars": "--bg:#0d1120;--bg2:#141828;--bg3:#1a1e2e;--border:#2a2e40;--text:#d4d8e8;--dim:#6a7090;--accent:#569cd6;--green:#56d364;--red:#e57575;--gold:#ffd700;--orange:#ce9178;--purple:#c586c0;--teal:#4ec9b0;--titlefg:#ffffff;--hl-com:#6a9955;--hl-fn:#dcdcaa;--hl-kw:#c586c0;--hl-macro:#569cd6;--hl-num:#b5cea8;--hl-op:#56b6c2;--hl-str:#ce9178;--hl-sym:#d19a66;--hl-type:#4ec9b0;"
+  },
+  "light": {
+   "palette": "daylight",
+   "vars": "--bg:#ffffff;--bg2:#f5f7fa;--bg3:#eaeef3;--border:#d5dbe3;--text:#222730;--dim:#6b7480;--accent:#0969da;--green:#1a7f37;--red:#cf222e;--gold:#9a6700;--orange:#bc4c00;--purple:#8250df;--teal:#0a7b83;--titlefg:#222730;--hl-com:#008000;--hl-fn:#795e26;--hl-kw:#af00db;--hl-macro:#0000ff;--hl-num:#098658;--hl-op:#0451a5;--hl-str:#a31515;--hl-sym:#b26900;--hl-type:#267f99;"
+  }
+ }
+}

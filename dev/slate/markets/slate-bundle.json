@@ -1,0 +1,283 @@
+{
+ "assets": {
+  "data/kind_replay-2dfc6dc2.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "kind_replay",
+   "order": "col",
+   "path": "data/kind_replay-2dfc6dc2.f64.bin",
+   "shape": [
+    12,
+    2
+   ],
+   "url": "data/kind_replay-2dfc6dc2.f64.bin"
+  },
+  "data/kind_replay-c6b61236.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "kind_replay",
+   "order": "col",
+   "path": "data/kind_replay-c6b61236.f64.bin",
+   "shape": [
+    12,
+    2
+   ],
+   "url": "data/kind_replay-c6b61236.f64.bin"
+  },
+  "data/kind_replay-d36e5c35.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "kind_replay",
+   "order": "col",
+   "path": "data/kind_replay-d36e5c35.f64.bin",
+   "shape": [
+    12,
+    2
+   ],
+   "url": "data/kind_replay-d36e5c35.f64.bin"
+  },
+  "data/kind_replay-ffa3bbf4.f64.bin": {
+   "dtype": "f64",
+   "mime": "application/octet-stream",
+   "name": "kind_replay",
+   "order": "col",
+   "path": "data/kind_replay-ffa3bbf4.f64.bin",
+   "shape": [
+    12,
+    2
+   ],
+   "url": "data/kind_replay-ffa3bbf4.f64.bin"
+  }
+ },
+ "cells": [
+  {
+   "file": "cells/intro.json",
+   "id": "intro",
+   "kind": "markdown",
+   "markdown": "# Markets\n\nTwo of the AgriDatasets tables follow crops to market: weekly avocado sales in the United States from\n2017 to 2024, and coffee production by country in 2016 and 2017.",
+   "native": true,
+   "output": true,
+   "tags": []
+  },
+  {
+   "file": "cells/setup.json",
+   "hidecode": false,
+   "id": "setup",
+   "kind": "code",
+   "output": true,
+   "source": "using AgriDatasets, DataFrames, Statistics, Dates, AgriViz\n\navo = load_dataset(\"avocado_us_sale\")\navo.type = String.(avo.type)\navo.year = year.(avo.week_ending)\navo.week = week.(avo.week_ending)\nkinds = [\"Conventional\", \"Organic\"]\nprices = unstack(avo, :week_ending, :type, :avg_selling_price)\n(weeks = nrow(prices), first = prices.week_ending[1], last = prices.week_ending[end],\n missing = count(ismissing, Matrix(prices[:, kinds])), years = sort(unique(avo.year)))",
+   "tags": [
+    "import_scaffold"
+   ]
+  },
+  {
+   "file": "cells/avo_head.json",
+   "id": "avo_head",
+   "kind": "markdown",
+   "markdown": "## Avocados\n\n`avocado_us_sale` records each week's average selling price and units sold across the US, separately\nfor conventional and organic fruit.",
+   "native": true,
+   "output": true,
+   "tags": []
+  },
+  {
+   "file": "cells/yearly.json",
+   "hidecode": false,
+   "id": "yearly",
+   "kind": "code",
+   "output": true,
+   "source": "vol = unstack(avo, :week_ending, :type, :total_bulk_and_bags_units)\nyearly = combine(groupby(transform(prices, :week_ending => ByRow(year) => :year), :year),\n    :Conventional => (x -> round(mean(x); digits = 2)) => :conventional,\n    :Organic => (x -> round(mean(x); digits = 2)) => :organic)\nyearly.premium = round.(100 .* (yearly.organic ./ yearly.conventional .- 1); digits = 1)\nshare = combine(groupby(transform(vol, :week_ending => ByRow(year) => :year), :year),\n    [:Conventional, :Organic] => ((c, o) -> round(100 * sum(o) / (sum(c) + sum(o)); digits = 1)) => :organic_share)\nleftjoin(yearly, share; on = :year)",
+   "tags": []
+  },
+  {
+   "file": "cells/avocados.json",
+   "id": "avocados",
+   "kind": "markdown",
+   "markdown": "By these yearly averages, organic avocados cost between 30.4% and\n49.5% more than conventional ones, and their share of the units sold grew from\n3.3% in 2017 to 5.7% in 2024.\n\nWeek by week, the two prices move together. The shaded band between them is the organic premium. It\nstays open all through the eight years except for a few weeks in the autumn of 2017, when conventional\nfruit briefly cost more. The breaks in the lines are weeks missing from the data, in December 2018 and\nat the end of 2020.",
+   "native": true,
+   "output": true,
+   "tags": []
+  },
+  {
+   "file": "cells/pricechart.json",
+   "hidecode": true,
+   "id": "pricechart",
+   "kind": "code",
+   "output": true,
+   "source": "# Weekly price per avocado for each kind. The band between the lines is the organic premium: an\n# invisible base at the conventional price with the difference stacked on top (`stackStrategy = all`,\n# since for a few weeks in 2017 conventional cost more). Weeks with no data break the lines.\nfunction pts(y)\n    out = Any[]\n    for (i, (d, v)) in enumerate(zip(prices.week_ending, y))\n        i > 1 && d - prices.week_ending[i - 1] > Day(8) && push!(out, [string(d - Day(7)), nothing])\n        push!(out, [string(d), round(v; digits = 2)])\n    end\n    return out\nend\nkindline(k) = (type = :line, name = k, showSymbol = false, lineStyle = (width = 1.5,), z = 3,\n               endLabel = (show = true, formatter = \"{a}\", distance = 6, fontSize = 12),\n               data = pts(prices[!, k]))\nband(name, y, style) = (type = :line, name = name, stack = \"premium\", stackStrategy = :all, showSymbol = false,\n                        silent = true, lineStyle = (width = 0,), areaStyle = style, tooltip = (show = false,),\n                        data = pts(y))\n\nechart(;\n    grid = (left = 48, right = 92, top = 36, bottom = 28),\n    legend = (data = kinds, top = 0, icon = :roundRect, itemWidth = 14, itemHeight = 4),\n    xAxis = (type = :time, splitLine = (show = false,)),\n    yAxis = (type = :value, min = 0.6, max = 2.2, interval = 0.4, axisLabel = (formatter = \"\\${value}\",),\n             splitLine = (lineStyle = (opacity = 0.35,),)),\n    tooltip = (trigger = :axis,),\n    series = [band(\"base\", prices.Conventional, (opacity = 0,)),\n              band(\"premium\", prices.Organic .- prices.Conventional, (opacity = 0.14,)),\n              kindline(\"Conventional\"), kindline(\"Organic\")],\n    height = 320,\n    modes(m -> (series = [(silent = true,), (areaStyle = (color = INK[m].muted,),),\n                          ((itemStyle = (color = c,), lineStyle = (color = c,), endLabel = (color = INK[m].secondary,))\n                           for c in CATEGORICAL[m][1:2])...],))...,\n)",
+   "tags": [
+    "hidecode"
+   ]
+  },
+  {
+   "file": "cells/season_head.json",
+   "id": "season_head",
+   "kind": "markdown",
+   "markdown": "### Through the year\n\nAveraging each month over the eight years separates the seasonal cycle from the year-to-year swings.\nPick a kind to compare its cycle with 2024.",
+   "native": true,
+   "output": true,
+   "tags": []
+  },
+  {
+   "file": "cells/controls.json",
+   "hidecode": true,
+   "id": "controls",
+   "kind": "code",
+   "output": true,
+   "source": "@bind kind Radio(kinds, \"Conventional\"; label = \"avocados\")",
+   "tags": []
+  },
+  {
+   "file": "cells/seasons.json",
+   "hidecode": true,
+   "id": "seasons",
+   "kind": "code",
+   "output": true,
+   "source": "# The price year by year, month by month: the band spans 2017–2024 (lowest to highest monthly\n# average), the grey line is its median, and 2024 is drawn over it. The radio above picks the kind.\nyears = sort(unique(avo.year))\nmonths = Dates.monthabbr.(1:12)\navg(v) = isempty(v) ? NaN : mean(v)          # a month the data skips (Dec 2018, Nov–Dec 2020)\nmonthly(k) = (r = avo[avo.type .== k, :];\n              [avg(r.avg_selling_price[(r.year .== y) .& (month.(r.week_ending) .== m)]) for y in years, m in 1:12])\nprof(k, f) = [round(f(filter(!isnan, c)); digits = 2) for c in eachcol(monthly(k))]\nlatest(k) = round.(monthly(k)[end, :]; digits = 2)\nrangeband(name, y, style) = (type = :line, name = name, stack = \"range\", showSymbol = false, silent = true,\n                             lineStyle = (width = 0,), areaStyle = style, tooltip = (show = false,), data = y)\nprofline(name, y, w) = (type = :line, name = name, symbol = :circle, symbolSize = 5, lineStyle = (width = w,), data = y)\n\nechart(;\n    grid = (left = 48, right = 48, top = 40, bottom = 28),\n    legend = (data = [(name = \"2017–2024 range\", icon = :roundRect), \"median\", \"2024\"], top = 0,\n              itemWidth = 14, itemHeight = 8),\n    xAxis = (type = :category, data = months, boundaryGap = false),\n    yAxis = (type = :value, min = 0.6, max = 2.2, interval = 0.4, axisLabel = (formatter = \"\\${value}\",),\n             splitLine = (lineStyle = (opacity = 0.35,),)),\n    tooltip = (trigger = :axis,),\n    series = [rangeband(\"low\", @replay(kind, prof(kind, minimum)), (opacity = 0,)),\n              rangeband(\"2017–2024 range\", @replay(kind, prof(kind, maximum) .- prof(kind, minimum)), (opacity = 0.2,)),\n              profline(\"median\", @replay(kind, prof(kind, median)), 1.5),\n              profline(\"2024\", @replay(kind, latest(kind)), 2.5)],\n    height = 320,\n    modes(m -> (series = [(silent = true,),\n                          (itemStyle = (color = INK[m].muted,), areaStyle = (color = INK[m].muted,)),\n                          (itemStyle = (color = INK[m].secondary,), lineStyle = (color = INK[m].secondary,)),\n                          (itemStyle = (color = CATEGORICAL[m][1],), lineStyle = (color = CATEGORICAL[m][1],))],))...,\n)",
+   "tags": [
+    "hidecode",
+    "macrocall"
+   ]
+  },
+  {
+   "file": "cells/season_read.json",
+   "id": "season_read",
+   "kind": "markdown",
+   "markdown": "In a typical year, conventional avocados are cheapest in\nFebruary ($0.96) and dearest in\nJuly ($1.19). In 2024 they sold\nabove that median in 9 of the twelve months.",
+   "native": true,
+   "output": true,
+   "tags": []
+  },
+  {
+   "file": "cells/coffee_head.json",
+   "id": "coffee_head",
+   "kind": "markdown",
+   "markdown": "## Coffee\n\n`coffee_production` gives the output of each producing country in 2016 and 2017. It comes from\nspData's `coffee_data`, which does not state a unit, so the figures are best read for relative size\nand change.",
+   "native": true,
+   "output": true,
+   "tags": []
+  },
+  {
+   "file": "cells/coffee.json",
+   "hidecode": true,
+   "id": "coffee",
+   "kind": "code",
+   "output": true,
+   "source": "# Coffee production in 2016 and 2017 for the fifteen largest producers, one row per country: the grey\n# dot is 2016, the blue dot 2017, and the bar between them is the change. The bar is an invisible\n# segment up to the smaller year stacked under a thin one spanning the difference.\ncof = dropmissing(load_dataset(\"coffee_production\"))\ntop = last(sort(cof, :coffee_production_2017), 15)\na, b = top.coffee_production_2016, top.coffee_production_2017\npct(c) = (r = only(eachrow(cof[cof.name_long .== c, :]));\n          round(100 * (r.coffee_production_2017 / r.coffee_production_2016 - 1); digits = 1))\nseg(name, y, w) = (type = :bar, name = name, stack = \"change\", barWidth = w, silent = true,\n                   tooltip = (show = false,), data = y)\ndot(name, y, s) = (type = :scatter, name = name, symbolSize = s, z = 3, data = y)\n\nechart(;\n    grid = (left = 132, right = 32, top = 36, bottom = 40),\n    legend = (data = [\"2016\", \"2017\"], top = 0),\n    xAxis = (type = :value, name = \"production\", nameLocation = :middle, nameGap = 26,\n             splitLine = (lineStyle = (opacity = 0.35,),)),\n    yAxis = (type = :category, data = String.(top.name_long), axisTick = (show = false,),\n             axisLine = (show = false,)),\n    tooltip = (trigger = :axis, axisPointer = (type = :shadow,)),\n    series = [seg(\"from\", min.(a, b), 2), seg(\"change\", abs.(b .- a), 2),\n              dot(\"2016\", a, 9), dot(\"2017\", b, 11)],\n    height = 460,\n    modes(m -> (series = [(itemStyle = (color = :transparent,),),\n                          (itemStyle = (color = INK[m].axis,),),\n                          (itemStyle = (color = INK[m].muted,),),\n                          (itemStyle = (color = CATEGORICAL[m][1],),)],))...,\n)",
+   "tags": [
+    "hidecode"
+   ]
+  },
+  {
+   "file": "cells/coffee_read.json",
+   "id": "coffee_read",
+   "kind": "markdown",
+   "markdown": "Across the 35 countries with figures for both years, production fell\n9.1%.\nBrazil, by far the largest producer, fell 15.0% and Indonesia's output halved\n(-51.5%). Among the fifteen shown, Mexico (+45.7%) and Ethiopia\n(+31.6%) grew the most.",
+   "native": true,
+   "output": true,
+   "tags": []
+  }
+ ],
+ "frontend": [],
+ "generator": "KaimonSlate 1.9.0",
+ "key": "7e0c3a91091c45628824deea28cd0848be5fbbc63066d43ff6b40d9a66da5c39",
+ "libs": [
+  {
+   "css": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js",
+   "name": "katex"
+  },
+  {
+   "js": "https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js",
+   "name": "echarts"
+  }
+ ],
+ "notebook": {
+  "abstract": "",
+  "byline": "",
+  "file": "markets.jl",
+  "id": "markets",
+  "subtitle": "",
+  "title": "Markets"
+ },
+ "rendered": {
+  "at": "2026-09-27T11:56:04.686Z",
+  "errors": [],
+  "frozen": [],
+  "julia": "1.12.7",
+  "kernel": "worker",
+  "via": "hub"
+ },
+ "replays": {
+  "seasons:kind": {
+   "asset": "data/kind_replay-c6b61236.f64.bin",
+   "bytes": 192,
+   "control": "kind",
+   "domain": [
+    "Conventional",
+    "Organic"
+   ],
+   "seconds": 0.0020198822021484375,
+   "slice": [
+    12
+   ]
+  },
+  "seasons:kind#1": {
+   "asset": "data/kind_replay-ffa3bbf4.f64.bin",
+   "bytes": 192,
+   "control": "kind",
+   "domain": [
+    "Conventional",
+    "Organic"
+   ],
+   "seconds": 0.2076098918914795,
+   "slice": [
+    12
+   ]
+  },
+  "seasons:kind#2": {
+   "asset": "data/kind_replay-d36e5c35.f64.bin",
+   "bytes": 192,
+   "control": "kind",
+   "domain": [
+    "Conventional",
+    "Organic"
+   ],
+   "seconds": 0.001934051513671875,
+   "slice": [
+    12
+   ]
+  },
+  "seasons:kind#3": {
+   "asset": "data/kind_replay-2dfc6dc2.f64.bin",
+   "bytes": 192,
+   "control": "kind",
+   "domain": [
+    "Conventional",
+    "Organic"
+   ],
+   "seconds": 0.0020110607147216797,
+   "slice": [
+    12
+   ]
+  }
+ },
+ "runtime": "runtime/slate-embed.js",
+ "schema": 1,
+ "theme": {
+  "dark": {
+   "palette": "midnight",
+   "vars": "--bg:#0d1120;--bg2:#141828;--bg3:#1a1e2e;--border:#2a2e40;--text:#d4d8e8;--dim:#6a7090;--accent:#569cd6;--green:#56d364;--red:#e57575;--gold:#ffd700;--orange:#ce9178;--purple:#c586c0;--teal:#4ec9b0;--titlefg:#ffffff;--hl-com:#6a9955;--hl-fn:#dcdcaa;--hl-kw:#c586c0;--hl-macro:#569cd6;--hl-num:#b5cea8;--hl-op:#56b6c2;--hl-str:#ce9178;--hl-sym:#d19a66;--hl-type:#4ec9b0;"
+  },
+  "light": {
+   "palette": "daylight",
+   "vars": "--bg:#ffffff;--bg2:#f5f7fa;--bg3:#eaeef3;--border:#d5dbe3;--text:#222730;--dim:#6b7480;--accent:#0969da;--green:#1a7f37;--red:#cf222e;--gold:#9a6700;--orange:#bc4c00;--purple:#8250df;--teal:#0a7b83;--titlefg:#222730;--hl-com:#008000;--hl-fn:#795e26;--hl-kw:#af00db;--hl-macro:#0000ff;--hl-num:#098658;--hl-op:#0451a5;--hl-str:#a31515;--hl-sym:#b26900;--hl-type:#267f99;"
+  }
+ }
+}
