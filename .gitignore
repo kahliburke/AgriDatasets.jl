@@ -25,3 +25,8 @@ desktop.ini
 # Temporary and log files
 *.log
 *.tmp
+# Rendered Slate notebook bundles and the Vitepress toolchain
+docs/slate/
+docs/node_modules/
+docs/package-lock.json
+docs/src/.vitepress/cache/

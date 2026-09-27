@@ -1,6 +1,11 @@
 [deps]
 AgriDatasets = "15d1ec42-5cd8-4285-ba5c-b695409997b9"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+DocumenterSlate = "5d80218d-9a2a-4b5c-a024-19fb641bfa22"
+DocumenterVitepress = "4710194d-e776-4893-9690-8d956a29c365"
+KaimonSlate = "f7b954f5-0334-4562-ac21-b005218ce1da"
 
 [sources]
 AgriDatasets = {path = ".."}
+DocumenterSlate = {rev = "main", url = "https://github.com/kahliburke/DocumenterSlate.jl"}
+KaimonSlate = {rev = "feat/documenter", url = "https://github.com/kahliburke/KaimonSlate.jl"}

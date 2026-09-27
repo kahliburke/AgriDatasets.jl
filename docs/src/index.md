@@ -1,75 +1,41 @@
-# AgriDatasets.jl
+```@raw html
+---
+layout: home
 
-**AgriDatasets.jl** is an open-science Julia package providing a curated collection of **71 agricultural, agronomic, soil, forestry, and animal science datasets**, ready to use as `DataFrame` objects.
+hero:
+  name: AgriDatasets.jl
+  text: Agricultural data, ready to explore
+  tagline: 71 datasets from agronomy, soil science, forestry and animal science, each one a DataFrame away. Field trials, crop yields, pest control, livestock and markets.
+  actions:
+    - theme: brand
+      text: Get started
+      link: /guide
+    - theme: alt
+      text: Field trials
+      link: /field_trials
+    - theme: alt
+      text: GitHub
+      link: https://github.com/kahliburke/AgriDatasets.jl
+  image:
+    src: /logo-hero.png
+    alt: The AgriDatasets logo, a field with crops and a laptop showing charts
 
-The package brings together datasets from multiple sources, including established R packages and open-access repositories, providing a consistent interface for discovering, loading, and exploring agricultural data in Julia.
-
-## Quick start
-
-```julia
-using AgriDatasets
+features:
+  - icon: 🌾
+    title: 71 datasets
+    details: Uniformity trials, variety and fertiliser experiments, soil surveys, pest and disease studies, livestock growth and crop markets.
+  - icon: 📦
+    title: One call to load
+    details: Each dataset loads as a DataFrame with a single call, and one more describes its source, variables and licence.
+  - icon: 📚
+    title: Sourced and attributed
+    details: Drawn from agridat, ALUES, AgroR, GLMsData and open repositories, each with its original licence.
+---
 ```
 
-## List available datasets
-
-```julia
-list_datasets()
+```@raw html
+<style>
+/* The logo carries its own colour, so the hero shows it on the plain page. */
+.VPHero .image-bg { display: none; }
+</style>
 ```
-
-Returns a `Vector{String}` containing the names of all available datasets.
-
-## Load a dataset
-
-```julia
-df = load_dataset("bamboo_growth")
-```
-
-Loads the specified dataset and returns it as a `DataFrame`.
-
-
-## Explore metadata
-
-```julia
-dataset_info("bamboo_growth")
-```
-
-Displays metadata for a specific dataset, including its description, source, and variables.
-
-### To view the complete metadata catalog:
-
-```julia
-dataset_info()
-```
-
-## Dataset collection
-
-The `AgriDatasets.jl` package covers a variety of agricultural and scientific topics, including:
-
-- Agronomy and crop production
-- Soil science
-- Forestry and plant growth
-- Animal science and livestock
-- Pest control and plant pathology
-- Agricultural experiments and experimental designs
-- Horticulture and plant science
-
-
-## Data sources
-
-The collection includes datasets sourced from established R packages such as `agridat`, `ALUES`, `AgroR`, `gpk`, `aqp`, and `GLMsData`, as well as open-access repositories such as `Zenodo`.
-
-Source attribution and licensing information are provided for the individual datasets.
-
-## API Reference
-
-```@docs
-list_datasets
-load_dataset
-dataset_info
-```
-
-## License
-
-`AgriDatasets.jl` is distributed under the GPL-2.0-or-later license.
-
-Individual datasets may have different original licenses or reuse terms. Please consult the dataset metadata and licensing documentation before redistributing or reusing individual datasets.

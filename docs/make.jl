@@ -1,92 +1,25 @@
-using Documenter
-using Documenter.Remotes
+using Documenter, DocumenterVitepress, DocumenterSlate
 using AgriDatasets
 
-makedocs(
+const REPO = "github.com/kahliburke/AgriDatasets.jl"
+
+# Pages that place a notebook render it through Slate: the hub running on this machine, or, in CI,
+# a Kaimon host the build starts. The rendered bundles land in `docs/slate/` (git-ignored).
+datasets = sort!(["datasets/$f" for f in readdir(joinpath(@__DIR__, "src", "datasets")) if endswith(f, ".md")])
+
+makedocs(;
     sitename = "AgriDatasets.jl",
     modules = [AgriDatasets],
-    format = Documenter.HTML(
-        assets = ["assets/favicon.ico"],
-    ),
+    repo = Remotes.GitHub("kahliburke", "AgriDatasets.jl"),
+    format = MarkdownVitepress(; repo = REPO, devbranch = "main", devurl = "dev"),
+    plugins = [SlateDocs()],
     pages = [
         "Home" => "index.md",
-        "Datasets" => [
-            "datasets/alfalfa_soil.md",
-            "datasets/apple_canker.md",
-            "datasets/apple_uniformity.md",
-            "datasets/arabica_soil.md",
-            "datasets/arabica_temp.md",
-            "datasets/arabica_terrain.md",
-            "datasets/arabica_water.md",
-            "datasets/avocado_us_sale.md",
-            "datasets/bamboo_growth.md",
-            "datasets/biological_control.md",
-            "datasets/bird_grazing.md",
-            "datasets/blackgrass_herbicide.md",
-            "datasets/black_duck_survival.md",
-            "datasets/broiler_growth.md",
-            "datasets/budworm_pyrethroid.md",
-            "datasets/carrot_fly_infestation.md",
-            "datasets/carrot_insecticide.md",
-            "datasets/cattle_butterfat.md",
-            "datasets/cauliflower_growth.md",
-            "datasets/coffee_composition.md",
-            "datasets/coffee_production.md",
-            "datasets/cork_tree_direction.md",
-            "datasets/corn_hybrid_density.md",
-            "datasets/cotton_pesticide.md",
-            "datasets/cowpea_maize_yield.md",
-            "datasets/cows_insemination.md",
-            "datasets/earthworm_crop_soils.md",
-            "datasets/earthworm_population.md",
-            "datasets/eelworm_fumigation.md",
-            "datasets/egg_weight_daily.md",
-            "datasets/eucalyptus_progenies.md",
-            "datasets/fish_feeding.md",
-            "datasets/fungicide_latin_square.md",
-            "datasets/grape_uniformity.md",
-            "datasets/guinea_pig_sleep.md",
-            "datasets/hawaii_plant_size.md",
-            "datasets/hawaii_tree_growth.md",
-            "datasets/idn_rice_farms.md",
-            "datasets/kiwi_crop_design.md",
-            "datasets/lady_bird_fungus.md",
-            "datasets/lamb_births.md",
-            "datasets/nitrofen_toxicity.md",
-            "datasets/orange_rootstocks.md",
-            "datasets/peach_uniformity.md",
-            "datasets/pig_weight_gain.md",
-            "datasets/plant_growth_regulator.md",
-            "datasets/pollen_removal.md",
-            "datasets/potato_scab_sulfur.md",
-            "datasets/rabbit_body_mass.md",
-            "datasets/red_wine_quality.md",
-            "datasets/rice_wheat_production.md",
-            "datasets/river_deforestation.md",
-            "datasets/robusta_soil.md",
-            "datasets/robusta_temp.md",
-            "datasets/robusta_terrain.md",
-            "datasets/robusta_water.md",
-            "datasets/seed_germination.md",
-            "datasets/soil_munsell_colors.md",
-            "datasets/soil_munsell_minerals.md",
-            "datasets/soybean_cultivars.md",
-            "datasets/strawberry_cross_disease.md",
-            "datasets/strawberry_yield.md",
-            "datasets/timber_genetics.md",
-            "datasets/tomato_insecticides.md",
-            "datasets/tomato_uniformity.md",
-            "datasets/toxin_lethal_dose.md",
-            "datasets/turnip_density.md",
-            "datasets/us_state_soils.md",
-            "datasets/wheat_bunt.md",
-            "datasets/wheat_splitsplit.md",
-            "datasets/willow_cutting_yield.md",
-        ],
+        "Guide" => "guide.md",
+        "Stories" => ["Field trials" => "field_trials.md", "Markets" => "markets.md"],
+        "Datasets" => datasets,
     ],
-    repo = Remotes.GitHub("lightbluetitan", "AgriDatasets.jl"),
 )
 
-deploydocs(
-    repo = "github.com/lightbluetitan/AgriDatasets.jl.git",
-)
+DocumenterVitepress.deploydocs(; repo = REPO, target = joinpath(@__DIR__, "build"),
+                               branch = "gh-pages", devbranch = "main", push_preview = true)
